@@ -89,6 +89,7 @@ body{
 }
 .todo_list li{
     padding: 0.5rem;
+    cursor: pointer;
 }
 .todo_list li:hover{
     text-decoration: line-through wavy red;
