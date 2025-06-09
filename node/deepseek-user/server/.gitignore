@@ -1,0 +1,11 @@
+# 环境变量文件
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# 其他常见不需要提交的文件
+node_modules/
+.DS_Store
+*.log
