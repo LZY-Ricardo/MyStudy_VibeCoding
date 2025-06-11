@@ -1,0 +1,23 @@
+<script>
+    function GrandParent() {
+        this.name = 'grandParent'
+        this.card = 'visa'
+    }
+
+    Parent.prototype = new GrandParent() // {name: 'grandParent', card: 'visa'}.__proto__ === GrandParent.prototype.__proto__ === Object.prototype.__proto__ === null
+    function Parent() {
+        this.lastName = '路'
+    }
+
+    // {lastName: '路'}.__proto__ = {name: 'grandParent', card: 'visa'}
+    Child.prototype = new Parent() 
+    function Child() {
+        this.name = '路明非'
+        this.age = 18
+    }
+
+    const c = new Child()
+
+    console.log(c.lastName) // 路
+    console.log(c.card) // visa
+</script>
