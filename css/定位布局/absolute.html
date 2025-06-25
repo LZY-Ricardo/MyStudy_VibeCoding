@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: grey;
+        }
+        .parent{
+            display: none;
+            width: 550px;
+            height: 400px;
+            background-color: aqua;
+            position: relative;
+            /* position: absolute;
+            left: 200px;
+            top: 100px; */
+        }
+        .child{
+            width: 300px;
+            height: 200px;
+            background-color: coral;
+            position: absolute;
+            right: 125px;
+            top: 100px
+        }
+        .box{
+            width: 300px;
+            height: 200px;
+            background-color: rgb(219, 56, 170);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child"></div>
+    </div>
+    <div class="box">
+        我是绝对定位的box, 我要水平垂直居中
+    </div>
+</body>
+</html>
