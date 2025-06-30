@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Simple SPA</h1>
+    <div id="root"></div>
+    <script>
+        let home = `
+            <h1>首页</h1>
+            <p>
+                这是首页
+            </p>
+            <button id="btn">切换到关于我们</button>
+        `
+        let about = `
+            <h1>关于我们</h1>
+            <p>
+                这是关于我们
+            </p>
+        `
+        let root = document.getElementById('root')
+        root.innerHTML = home
+
+        let btn = document.getElementById('btn')
+        btn.addEventListener('click', () => {
+            root.innerHTML = about
+        })
+    </script>
+</body>
+</html>
