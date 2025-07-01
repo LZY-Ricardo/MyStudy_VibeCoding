@@ -6,7 +6,7 @@
     1. 文字环绕图片
 
 - 水平布局
-1. display: inline-block;   会来间隙问题    解决办法父容器：font-size：0
+1. display: inline-block;   会带来间隙问题    解决办法父容器：font-size：0
 2. float：left;
 
 - 浮动布局
