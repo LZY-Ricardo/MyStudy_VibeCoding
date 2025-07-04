@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+ul li{
+    list-style: none;
+}
+
+.hd{
+    background-color: #8E6FF7;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    height: 53px;
+    align-items: center;
+}
+
+.city{
+    font-style: 18px;
+    color: #FFF;
+}
+
+.icon-weizhi{
+    margin-right: 6px;
+    color: rgba(255,255,255,0.9);
+}
+
+.changeCity-btn{
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 4px 4px 4px 4px;
+    padding: 4px 13px;
+    font-size: 14px;
+    color:#FFF;
+}
+
+.icon-24gf-city4{
+    margin-right: 3px;
+    color: rgba(255,255,255,0.9);
+}   
+
+.bd{
+    padding: 7px 16px 20px 16px;
+}
+
+.today{
+    background: linear-gradient( 146deg, rgba(142,111,247,0.1) 0%, rgba(142,111,247,0.05) 100%), rgba(0,0,0,0);
+    border-radius: 16px 16px 16px 16px;
+    padding: 24px;
+}
+
+.today-temperature{
+    margin-bottom: 24px;    
+}
+
+.temperature-info{
+    font-size: 60px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.weather-type{
+    font-size: 14px;
+    text-align: center;
+    color: #4B5563;
+}
+
+.today-message ul{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 16px;
+}
+
+.today-message ul li{
+    text-align: center;
+}
+
+.category{
+    font-size: 16px;
+    color:#4B5563;
+}
+
+.value{
+    font-size: 16px;
+}
+
+.today-message .iconfont{
+    color: #8E6FF7;
+}
+
+.future{
+    margin-top: 24px;
+}
+
+.title{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.future-list{
+    display: flex;
+    overflow-x: scroll;
+}
+
+.future-item{
+    flex: 0 0 120px;
+    padding: 17px;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
+    border-radius: 16px 16px 16px 16px;
+    border: 1px solid #F3F4F6;
+    margin-right: 16px;
+}
+
+.future-item:last-child{
+    margin-right: 0;
+}
+
+.week{
+    color: #4B5563;
+    font-size: 14px;
+}
+
+.pic{
+    margin: 8px 0 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pic img{
+    width: 64px;
+    height: 64px;
+}
+
+.max-min{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.max{
+    font-size: 16px;
+    color: #000000;
+    margin-right: 3px;
+}
+
+.min{
+    color:#9CA3AF;
+    font-size: 14px;
+}
+
