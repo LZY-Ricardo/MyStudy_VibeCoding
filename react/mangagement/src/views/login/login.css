@@ -1,0 +1,26 @@
+.login{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: url('../../assects/loginbg.png');
+    background-position: center center;
+    background-size: cover;
+}
+
+.login-container{
+    width: 440px;
+    height: 360px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+}
+
+.login-logo{
+    width: 60px;
+    display: block;
+    margin: 0 auto 20px;
+}
