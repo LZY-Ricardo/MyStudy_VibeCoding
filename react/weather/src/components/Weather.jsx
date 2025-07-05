@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import './Weather.css';
 import AMapLoader from '@amap/amap-jsapi-loader';
-
+import {formatWeek} from '../lib/week'
+import {formatWeatherImg} from '../lib/weatherImg'
+    
 function Weather() {
     const [city, setCity] = useState('北京市')
     const [weather, setWeather] = useState({})
@@ -129,9 +131,11 @@ function Weather() {
                         {future.length > 0 ? (
                             future.slice(1).map((item, index) => (
                                 <li className="future-item" key={index}>
-                                    <div className="week">{weekMap[item.week]}</div>
+                                    <div className="week">{formatWeek(item.week)}</div>
+                                    {/* <div className="week">{weekMap[item.week]}</div> */}
                                     <div className="pic">
-                                        <img src={`/img/${item.dayWeather}.png`} alt={item.dayWeather} />
+                                        <img src={formatWeatherImg(item.dayWeather)} alt={item.dayWeather} />
+                                        {/* <img src={`/img/${item.dayWeather}.png`} alt={item.dayWeather} /> */}
                                     </div>
                                     <div className="max-min">
                                         <div className="max">{item.dayTemp}℃ </div>
