@@ -1,0 +1,30 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  height: 100vh;
+  font-size: 0.85rem;
+}
+.input{
+  width: 200px;
+}
+.response{
+  margin-top: 10px;
+  min-height: 300px;
+  width: 100%;
+  text-align: left;
+}
+button{
+  padding: 0 10px;
+  margin-left: 6px;
+  border-radius: 100px;
+}
+
+.response-content{
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    color:rgb(168, 24, 212);
+    background: linear-gradient(to bottom, #a6c1ee, #f0f4fd);
+}
