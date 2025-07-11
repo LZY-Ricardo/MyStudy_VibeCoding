@@ -23,7 +23,7 @@ function App() {
   // dispatch 接受的参数，作为reducer 的第二个参数
   const [res, dispatch] = useReducer(reducer, {result: 0, a: {b: {c: 1, d: {e: 2}}}})
 
-  const [num, setNum] = useState({result: 0})
+  const [num, setNum] = useState({result:res.a.b.c})
 
   return (
     <div>
