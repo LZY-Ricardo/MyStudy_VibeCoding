@@ -9,7 +9,7 @@ function App() {
   const dispatch = useDispatch()
   const handleAddList = () => {
     const inputValue = inputRef.current.value
-    const index = list[list.length - 1]?.id || 1
+    const index = list[list.length - 1]?.id || 0
     if (inputValue === '') {
       inputRef.current.placeholder = '请输入内容(不能为空)！！！'
       setTimeout(() => {
