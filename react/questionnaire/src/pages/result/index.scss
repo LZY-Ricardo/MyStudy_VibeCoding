@@ -1,0 +1,76 @@
+.result-container{
+    background-color: #F9FAFB;
+    height: 100vh;
+    &-hd{
+        padding: 0.7rem;
+        background: #FFFFFF;
+        box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
+        font-weight: 500;
+        font-size: 0.8rem;
+        text-align: left;
+        line-height: 24px;
+    }
+
+    &-bd{
+        padding-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &-result{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &-grade{
+                font-size: 1.3rem;
+                font-weight: 500;
+                color: #000000;
+                margin-bottom: 0.35rem;
+            }
+
+            &-desc{
+                font-size: 0.6rem;
+                font-weight: 400;
+                color: #6B7280;
+            }
+        }
+        &-share{
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            color: #42A5F5;
+            line-height: 1rem;
+            img {
+                width: 0.6rem;
+                height: 0.6rem;
+                margin-right: 0.2rem;
+            }
+        }
+    }
+
+    &-ft{
+        height: 2.2rem;
+        border: 1px solid #E5E7EB;
+        background: #FFFFFF;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        font-weight: 400;
+        font-size: 0.7rem;
+        line-height: 2.2rem;
+        text-align: center;
+        color: #42A5F5;
+        .retry-button{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img{
+            height: 0.6rem;
+            width: 0.6rem;
+            margin-right: 0.2rem;
+        }
+        }
+    }
+}
