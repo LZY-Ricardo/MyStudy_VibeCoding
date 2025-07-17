@@ -1,6 +1,6 @@
 import { Space, Button } from 'antd';
 import { useState } from 'react';
-import useComponentsStore from '../../stores/components';
+import { useComponentsStore } from '../../stores/components';
 
 export default function Header() {
     // const [mode, setMode] = useState('edit')
@@ -11,6 +11,7 @@ export default function Header() {
             <div className='h-[50px] flex justify-between items-center px-[20px]'>
                 <div>低代码编辑器</div>
                 <Space>
+                    
                     {
                         mode === 'edit' && (
                             <Button type="primary" onClick={() => setMode('preview')}>预览</Button>
