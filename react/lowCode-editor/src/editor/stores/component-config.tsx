@@ -17,6 +17,7 @@ export interface Action {
   registerComponent: (name: string, componentConfig: ComponentConfig) => void
 }
 
+// 每一个名字对应的组件具体是哪一个
 export const useComponentConfigStore = create<State & Action>(
   (set) => ({
     componentConfig: {
@@ -27,7 +28,10 @@ export const useComponentConfigStore = create<State & Action>(
       },
       Button: {
         name: 'Button',
-        defaultProps: {},
+        defaultProps: {
+          type: 'primary',
+          text: '按钮'
+        },
         component: Button
       },
       Page: {
@@ -50,3 +54,4 @@ export const useComponentConfigStore = create<State & Action>(
     }
   })
 )
+

@@ -1,47 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useComponentsStore } from '../../stores/components'
 import type { Component } from '../../stores/components'
 import { useComponentConfigStore } from '../../stores/component-config'
+import HoverMask from '../HoverMask'
 
 export default function EditArea() {
-  const { components, addComponent } = useComponentsStore()
+  const { components, addComponent, updateComponentProps } = useComponentsStore()
   const { componentConfig } = useComponentConfigStore()
-
-  // useEffect(() => {
-  //   addComponent({
-  //     id: 2,
-  //     name: 'Container',
-  //     props: {},
-  //     desc: '页面容器'
-  //   }, 1)
-
-  //   addComponent({
-  //     id: 3,
-  //     name: 'Button',
-  //     props: {
-  //       text: '提交'
-  //     },
-  //     desc: '按钮',
-  //     children: []
-  //   }, 2)
-
-  // }, [])
+  const [hoverComponentId, setHoverComponentId] = useState<number>()
 
   function renderComponents(components: Component[]): React.ReactNode {
     return components.map((component: Component) => {
       const config = componentConfig?.[component.name]
-      if (!config?.component) { // 没有对应的组件
-        console.log(666);
-        
+      if (!config?.component) { // 没有对应的组件，比如：'Page'
         return null
       }
-      console.log(666);
-      
       // 渲染组件
       return React.createElement(
         config.component,
         {
           key: component.id,
+          id: component.id,
+          name: component.name,
           ...config.defaultProps,
           ...component.props
         },
@@ -50,14 +30,33 @@ export default function EditArea() {
     })
   }
 
+  const handleMouseOver: React.MouseEventHandler = (e) => {
+    console.log(e.nativeEvent.composedPath());
+    const path = e.nativeEvent.composedPath()
+    for (let i = 0; i < path.length; i++) {
+      const ele = path[i] as HTMLElement
+      const componentId = ele.dataset.componentId
+      if (componentId) {
+        setHoverComponentId(+componentId)
+        return
+      }
+    }
+  }
+
   return (
-    <div>
+    <div className='h-[100%] edit-area' 
+      onMouseOver={handleMouseOver} 
+      onMouseLeave={() => setHoverComponentId(undefined)}
+    >
       {renderComponents(components)}
-      {/* <pre>
-        {
-          JSON.stringify(components, null, 2)
-        }
-      </pre> */}
+      {hoverComponentId && (
+        <HoverMask 
+          componentId={hoverComponentId} 
+          containerClassName='edit-area'
+          portalWrapperClassName='portal-wrapper'
+        />
+      )}
+      <div className="portal-wrapper"></div>
     </div>
   )
 }
