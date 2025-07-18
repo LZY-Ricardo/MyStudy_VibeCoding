@@ -13,7 +13,7 @@ export default function Page({id, name, children}: CommonComponentProps) {
   // const [{canDrop}, dropRef] = useDrop(() => ({
   //   accept: ['Button', 'Container', 'Page'],
   //   drop: (item: {type: string}, monitor) => {
-  //     const didDrop = monitor.didDrop()  // 是否被动冒泡接受其他组件
+  //     const didDrop = monitor.didDrop()  // 是否被动冒泡接收其他组件
   //     if (didDrop) return
       
   //     messageApi.success(item.type)
@@ -25,7 +25,7 @@ export default function Page({id, name, children}: CommonComponentProps) {
   //       props: props
   //     }, id)
   //   },
-  //   collect: (monitor) => {  // 接受区域
+  //   collect: (monitor) => {  // 接收区域
   //     return {
   //       canDrop: monitor.canDrop()
   //     }

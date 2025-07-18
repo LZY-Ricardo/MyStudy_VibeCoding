@@ -7,12 +7,12 @@ import { useMaterialDrop } from '../../hooks/useMaterialDrop'
 export default function Container({ id, name, children }: CommonComponentProps) {
   // const { addComponent } = useComponentsStore()
   // const { componentConfig } = useComponentConfigStore()
-  // 能接受拖拽进来的组件
+  // 能接收拖拽进来的组件
   // const [{canDrop}, dropRef] = useDrop(() => {
   //   return {
   //     accept: ['Button', 'Container'],
   //     drop: (item: {type: string}, monitor) => {
-  //       const didDrop = monitor.didDrop()  // 是否被动冒泡接受其他组件
+  //       const didDrop = monitor.didDrop()  // 是否被动冒泡接收其他组件
   //       if (didDrop) return
   //       // console.log(item)
   //       const props = componentConfig?.[item.type]?.defaultProps

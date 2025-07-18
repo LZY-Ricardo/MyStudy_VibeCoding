@@ -13,7 +13,7 @@ export function useMaterialDrop(accept: string[], id: number) {
     return {
       accept,
       drop: (item: {type: string}, monitor) => {
-        const didDrop = monitor.didDrop()  // 是否被动冒泡接受其他组件
+        const didDrop = monitor.didDrop()  // 是否被动冒泡接收其他组件
         if (didDrop) return
         messageApi.success(item.type)
         // console.log(item)
