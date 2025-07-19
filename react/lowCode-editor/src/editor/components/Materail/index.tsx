@@ -1,12 +1,15 @@
 import { useMemo } from 'react'
 import { useComponentConfigStore } from '../../stores/component-config'
 import MaterialItem from '../MaterialItem'
+import { useComponentsStore } from '../../stores/components'
 
 export default function Materail() {
   const { componentConfig } = useComponentConfigStore()
   const components = useMemo(() => {
-    return Object.values(componentConfig)  // [{xx}, {xx}, {xx}]
+    return Object.values(componentConfig).filter(item => item.name !== 'Page')  // [{xx}, {xx}, {xx}]
   }, [componentConfig])
+
+  const { components: componentsStore } = useComponentsStore()
 
   return (
     <div>
@@ -15,6 +18,9 @@ export default function Materail() {
           return <MaterialItem key={item.name + index} name={item.name} />
         })
       }
+      <pre>
+        {JSON.stringify(componentsStore, null, 2)}
+      </pre>
     </div>
   )
 }

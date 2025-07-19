@@ -5,7 +5,7 @@ import type { CommonComponentProps } from '../../interface'
 // import { useComponentConfigStore } from '../../stores/component-config'
 import { useMaterialDrop } from '../../hooks/useMaterialDrop'
 
-export default function Page({id, name, children}: CommonComponentProps) {
+export default function Page({id, name, children, styles}: CommonComponentProps) {
 
   // const [messageApi, contextHolder] = message.useMessage();
   // const { addComponent } = useComponentsStore()
@@ -13,7 +13,7 @@ export default function Page({id, name, children}: CommonComponentProps) {
   // const [{canDrop}, dropRef] = useDrop(() => ({
   //   accept: ['Button', 'Container', 'Page'],
   //   drop: (item: {type: string}, monitor) => {
-  //     const didDrop = monitor.didDrop()  // 是否被动冒泡接收其他组件
+  //     const didDrop = monitor.didDrop()  // 是否被动冒泡接受其他组件
   //     if (didDrop) return
       
   //     messageApi.success(item.type)
@@ -25,7 +25,7 @@ export default function Page({id, name, children}: CommonComponentProps) {
   //       props: props
   //     }, id)
   //   },
-  //   collect: (monitor) => {  // 接收区域
+  //   collect: (monitor) => {  // 接受区域
   //     return {
   //       canDrop: monitor.canDrop()
   //     }
@@ -41,7 +41,7 @@ export default function Page({id, name, children}: CommonComponentProps) {
         data-component-id={id}
         ref={dropRef as any} 
         className='p-[20px] h-[100%] box-border'
-        style={{border: canDrop ? '2px solid blue' : 'none'}}
+        style={{...styles, border: canDrop ? '2px solid blue' : 'none'}}
       >
         {children}
       </div>

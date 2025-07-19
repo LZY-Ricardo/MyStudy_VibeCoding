@@ -6,7 +6,7 @@ import HoverMask from '../HoverMask'
 import SelectedMask from '../SelectedMask'
 
 export default function EditArea() {
-  const { components, curComponentId, setCurComponentId } = useComponentsStore()
+  const { components, setCurComponentId, curComponentId } = useComponentsStore()
   const { componentConfig } = useComponentConfigStore()
   const [hoverComponentId, setHoverComponentId] = useState<number>()
 
@@ -23,6 +23,7 @@ export default function EditArea() {
           key: component.id,
           id: component.id,
           name: component.name,
+          styles: component.styles,
           ...config.defaultProps,
           ...component.props
         },
@@ -36,7 +37,7 @@ export default function EditArea() {
     const path = e.nativeEvent.composedPath()
     for (let i = 0; i < path.length; i++) {
       const ele = path[i] as HTMLElement
-      const componentId = ele.dataset.componentId
+      const componentId = ele.dataset && ele.dataset.componentId
       if (componentId) {
         setHoverComponentId(+componentId)
         return
@@ -44,18 +45,19 @@ export default function EditArea() {
     }
   }
 
-  // 借助冒泡机制, 点击页面上的任何组件, 点击行为都会冒泡到这里
+  // 借助冒泡机制，点击页面上的任何组件，点击行为都会冒泡到这里
   const handleClick: React.MouseEventHandler = (e) => {
-    console.log(e.nativeEvent.composedPath());
+    // console.log(e.nativeEvent.composedPath());
     const path = e.nativeEvent.composedPath()
     for (let i = 0; i < path.length; i++) {
       const ele = path[i] as HTMLElement
-      const componentId = ele.dataset.componentId
+      const componentId = ele.dataset && ele.dataset.componentId
       if (componentId) {
         setCurComponentId(+componentId)
         return
       }
-    }
+    } 
+    
   }
 
   return (
@@ -64,15 +66,16 @@ export default function EditArea() {
       onMouseLeave={() => setHoverComponentId(undefined)}
       onClick={handleClick}
     >
+      
       {renderComponents(components)}
-      {hoverComponentId && (
+      {hoverComponentId && hoverComponentId !== curComponentId && (
         <HoverMask 
           componentId={hoverComponentId} 
           containerClassName='edit-area'
           portalWrapperClassName='portal-wrapper'
         />
       )}
-      {curComponentId && (
+      { curComponentId && (
         <SelectedMask 
           componentId={curComponentId} 
           containerClassName='edit-area'

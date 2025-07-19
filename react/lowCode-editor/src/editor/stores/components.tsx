@@ -1,29 +1,32 @@
 import { create } from 'zustand'
+import type { CSSProperties } from 'react'
 
 export interface Component {
   id: number,
   name: string,
   props: any,
+  styles?: CSSProperties,
   desc: string,
   children?: Component[],
   parentId?: number
 }
 export interface State {
   components: Component[],
-  curComponentId: number | null,
-  curComponent: Component | null,
+  curComponentId?: number | null,
+  curComponent: Component | null
 }
 export interface Action {
   addComponent: (component: any, parentId?: number) => void;
   deleteComponent: (componentId: number) => void;
   updateComponentProps: (componentId: number, props: any) => void;  // 更新组件属性
   setCurComponentId: (componentId: number) => void;
+  updateComponentStyles: (componentId: number, styles: CSSProperties) => void;
 }
 
 export const useComponentsStore = create<State & Action>(
   (set, get) => ({
     // 数据
-    components: [ // 整个项目的 json 树
+    components: [  // 整个项目的 json 树
       {
         id: 1,
         name: 'Page',
@@ -83,6 +86,20 @@ export const useComponentsStore = create<State & Action>(
         curComponentId: componentId,
         curComponent: getComponentById(componentId, state.components)
       }))
+    },
+    updateComponentStyles: (componentId, styles) => {  // 更新组件样式
+      set(state => {
+        const component = getComponentById(componentId, state.components)
+        if (component) {
+          component.styles = {...component.styles, ...styles}
+          return {
+            components: [...state.components]
+          }
+        }
+        return {
+          components: [...state.components]
+        }
+      }) 
     }
   })
 )
