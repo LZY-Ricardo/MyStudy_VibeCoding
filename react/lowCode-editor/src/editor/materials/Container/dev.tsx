@@ -4,7 +4,7 @@ import type { CommonComponentProps } from '../../interface'
 // import { useComponentConfigStore } from '../../stores/component-config'
 import { useMaterialDrop } from '../../hooks/useMaterialDrop'
 
-export default function Container({ id, name, children, styles }: CommonComponentProps) {
+export default function Container({ id, children, styles }: CommonComponentProps) {
   // const { addComponent } = useComponentsStore()
   // const { componentConfig } = useComponentConfigStore()
   // 能接受拖拽进来的组件

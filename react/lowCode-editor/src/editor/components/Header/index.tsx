@@ -1,10 +1,8 @@
 import { Space, Button } from 'antd'
-import { useState } from 'react'
-import {useComponentsStore} from '../../stores/components'
+import { useComponentsStore } from '../../stores/components'
 
 export default function Header() {
-  // const [mode, setMode] = useState('edit')
-  const { mode, setMode } = useComponentsStore((state:any) => state)
+  const { mode, setMode } = useComponentsStore((state: any) => state)
   console.log(mode);
   
 

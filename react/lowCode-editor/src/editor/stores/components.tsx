@@ -13,7 +13,8 @@ export interface Component {
 export interface State {
   components: Component[],
   curComponentId?: number | null,
-  curComponent: Component | null
+  curComponent: Component | null,
+  mode: 'edit' | 'preview',
 }
 export interface Action {
   addComponent: (component: any, parentId?: number) => void;
@@ -21,6 +22,7 @@ export interface Action {
   updateComponentProps: (componentId: number, props: any) => void;  // 更新组件属性
   setCurComponentId: (componentId: number) => void;
   updateComponentStyles: (componentId: number, styles: CSSProperties) => void;
+  setMode: (mode: 'edit' | 'preview') => void;
 }
 
 export const useComponentsStore = create<State & Action>(
@@ -36,6 +38,7 @@ export const useComponentsStore = create<State & Action>(
     ],
     curComponentId: null,
     curComponent: null,
+    mode: 'edit',
     // 方法
     addComponent: (component, parentId) => {  // 本质上就是要将一个对象添加到另一个对象中
       set((state) => {
@@ -100,6 +103,11 @@ export const useComponentsStore = create<State & Action>(
           components: [...state.components]
         }
       }) 
+    },
+    setMode: (mode) => {
+      set({
+        mode: mode
+      })
     }
   })
 )
