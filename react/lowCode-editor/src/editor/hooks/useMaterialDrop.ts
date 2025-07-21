@@ -25,9 +25,7 @@ export function useMaterialDrop(accept: string[], id: number) {
           name: item.type,
           props: props,
           desc: desc,
-          styles: {
-            backgroundColor: 'red'
-          }
+          styles: {},
         }, id)
       },
       collect: (monitor) => {

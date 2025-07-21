@@ -15,7 +15,7 @@ export default function MaterialItem(props: MaterialItemProps) {
   
   return (
     <div
-      ref={dragRef}
+      ref={dragRef as any}
       className='
         border-dashed
         border-[1px]

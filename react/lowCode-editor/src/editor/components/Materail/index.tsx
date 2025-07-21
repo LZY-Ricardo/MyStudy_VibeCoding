@@ -18,9 +18,6 @@ export default function Materail() {
           return <MaterialItem key={item.name + index} name={item.name} />
         })
       }
-      <pre>
-        {JSON.stringify(componentsStore, null, 2)}
-      </pre>
     </div>
   )
 }
