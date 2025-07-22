@@ -12,6 +12,6 @@
         transform:  translateX(0px) rotateZ(0deg);
     }
     to {
-        transform: translateX(300px) rotateZ(360deg);
+        transform: translateX(600px) rotateZ(360deg);
     }   
 }

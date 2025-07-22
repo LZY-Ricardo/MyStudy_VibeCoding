@@ -3,17 +3,17 @@ import './index.css'
 import { useEffect } from 'react'
 
 export default function Demo() {
-  // const width = useSpringValue(0, {
-  //   config: {
-  //     // duration: 2000,
-  //     mass: 20,
-  //     friction: 20,
-  //     tension: 80,
-  //   }
-  // })
-  // useEffect(() => {
-  //   width.start(300)
-  // }, [])
+  const width = useSpringValue(0, {
+    config: {
+      // duration: 2000,
+      mass: 20,
+      friction: 20,
+      tension: 80,
+    }
+  })
+  useEffect(() => {
+    width.start(300)
+  }, [])
 
   // const styles = useSpring({
   //   from: {
@@ -89,8 +89,8 @@ export default function Demo() {
   return (
     <div>
       {
-        styles.map((style,index) => (
-          <animated.div className='box' style={{...style, ...styles2[index]}} key={index}>
+        styles.map((style, index) => (
+          <animated.div className='box' style={{ ...style, ...styles2[index] }} key={index}>
           </animated.div>
         ))
       }
