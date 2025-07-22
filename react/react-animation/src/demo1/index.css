@@ -1,0 +1,10 @@
+.box{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    transition: all 2s ease-in-out;
+}
+.box:hover{
+    width: 1000px;
+    background-color: blue;
+}

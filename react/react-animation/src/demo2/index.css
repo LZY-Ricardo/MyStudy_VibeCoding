@@ -1,0 +1,17 @@
+.box{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    transform-origin: 50% 50%;
+    /* transform: rotate(45deg); */
+    animation: rotateZ 2s linear infinite;
+}
+
+@keyframes rotateZ {
+    from {
+        transform:  translateX(0px) rotateZ(0deg);
+    }
+    to {
+        transform: translateX(300px) rotateZ(360deg);
+    }   
+}
