@@ -20,3 +20,9 @@ react.
 1. 集中式路由配置
 - 将所有的路由配置在一个文件中, 方便管理
 - 路由懒加载: 当每个路由组件都用 React.lazy 包裹起来, 这样当用户访问该路由组件时, 才会加载该组件, 而不是一进入页面就加载所有的路由组件(为了提高首页加载速度)
+
+2. 开发登录页面
+ - css 样式隔离 xxx.module.less
+ - 发登录请求 axios  (XMLHttpRequest, fetch)
+
+ axios.post('/login')
