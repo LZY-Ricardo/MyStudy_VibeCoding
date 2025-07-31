@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>1</h2>
+    <button>点击</button>
+
+    <script>
+        let btn = document.querySelector('button')
+        let h2 = document.querySelector('h2')
+        let obj = {
+            count: 1
+        }
+        let num = obj.count // 防止递归爆栈
+
+        function observer(value) {
+            // 找出页面上所有 用到了 count 这个变量的 dom 结构 -- 找到订阅者
+            // 将订阅者的内容替换为新的内容
+            h2.innerHTML = value
+        }
+
+        Object.defineProperty(obj, 'count', {
+            get() {
+                return num
+            },
+            set(value) {
+                observer(value)
+                num = value
+            }
+        })
+
+        btn.addEventListener('click', () => {
+            obj.count++
+            console.log(obj.count);
+        })
+    </script>
+</body>
+</html>
