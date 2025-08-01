@@ -49,9 +49,14 @@
             linkList.forEach(el => {
                 el.addEventListener('click', (e) => {
                     e.preventDefault() // 阻止默认行为
+                    console.log(el.getAttribute('href'));
+                    console.log(el.href);
+                    console.log(location.pathname);
                     history.pushState(null, '', el.getAttribute('href')) // 或者使用 el.href  
                     // 进入浏览器的缓存栈,但是不受前进后退事件的影响 所以使用 监听 popstate 
                     renderView(location.pathname)
+                    console.log(location.pathname);
+                    console.log(location.href);
                 })            
             })
         }
