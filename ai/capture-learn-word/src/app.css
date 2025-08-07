@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    font-size: 16px;
+    background: linear-gradient(180deg, rgb(235, 189, 161) 0%, rgb(71, 49, 32) 100%);
+}
+
+.output{
+    margin-top: 20px;
+    width: 80%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.detail{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.detail button{
+    background-color: #000;
+    color: #fff;
+    width: 160px;
+    height: 32px;
+    border: none;
+    border-radius: 8px 8px 0 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.detail .fold{
+    width: 250px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 8px 8px 0 0;
+    transition: all 1s ease;
+
+}
+
+.detail .expand{
+    width: 250px;
+    height: 88vh;
+    background-color: #fff;
+    border-radius: 8px 8px 0 0;
+    transition: all 1s ease;
+}
+
+.expand img{
+    width: 60%;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+
+.expand .explaination{
+    color: #000;
+    font-weight: bold;
+}
+
+.explaination p {
+    margin: 0 10px 10px 10px;
+}
+
+.expand .reply{
+    color: #000;
+    font-weight: normal;
+    margin-top: 20px;
+}
+
+.reply p {
+    padding: 4px 10px;
+    margin: 0 10px 10px 10px;
+    border-radius: 6px;
+    border: 1px solid grey;
+}
+
