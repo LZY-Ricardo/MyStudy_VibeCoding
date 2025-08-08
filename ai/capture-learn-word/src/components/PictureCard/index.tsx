@@ -28,6 +28,15 @@ export default function PictureCard({ word, submit, audio }: PictureCardProps) {
         })
 
     }
+
+    const playAudio = () => {
+        const audioElement = new Audio(audio)
+        audioElement.play().catch(() => {
+            console.log('播放失败')
+        })
+    }
+
+
     return (
         <div className='card'>
             <input id='selectImage' type="file" className='input' accept='.jpg,.png,.jpeg,.gif' onChange={updateImageData}/>
@@ -37,8 +46,8 @@ export default function PictureCard({ word, submit, audio }: PictureCardProps) {
             <div className='word'>
                 {word}
             </div>
-            <div className='playAudio'>
-                <img style={{ width: 24 }} src="https://res.bearbobo.com/resource/upload/Omq2HFs8/playA-3iob5qyckpa.png" alt="" />
+            <div className='playAudio' onClick={playAudio}>
+                <img style={{ width: 50 }} src="https://res.bearbobo.com/resource/upload/Omq2HFs8/playA-3iob5qyckpa.png" alt="" />
             </div>
         </div>
     )

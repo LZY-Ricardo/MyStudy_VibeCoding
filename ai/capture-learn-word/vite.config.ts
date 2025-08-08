@@ -6,6 +6,16 @@ import postcsspxtoviewport from 'postcss-px-to-viewport'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/tts': {
+        target: 'https://openspeech.bytedance.com',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/tts/, ''),
+      },
+    },
+  },
   css: {
     postcss: {
       plugins: [
