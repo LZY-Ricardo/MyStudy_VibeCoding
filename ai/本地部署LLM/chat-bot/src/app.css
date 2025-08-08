@@ -1,0 +1,44 @@
+.container{
+    width: 80%;
+    height: 90vh;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px #ccc;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content{
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+.user{
+    text-align: right;
+}
+
+.item{
+    margin: 10px 0;
+    box-shadow: 0 1px 0 0 #ccc;
+    border-radius: 4px;
+}
+
+.input{
+    display: flex;
+}
+
+.input input{
+    flex-grow: 1;
+    font-size: 16px;
+    padding: 5px 20px;
+}
+
+.input button{
+  font-size: 16px;
+  padding: 5px 20px;
+  margin-left: 20px;
+}
