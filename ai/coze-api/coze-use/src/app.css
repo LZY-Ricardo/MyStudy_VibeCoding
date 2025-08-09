@@ -1,0 +1,63 @@
+.container{
+  display: flex;
+  align-items: start;
+  height: 100vh;
+  font-size: 0.85rem;
+}
+.input{
+  display: flex;
+  flex-direction: column;
+  min-width: 330px;
+}
+
+.preview{
+  max-width: 300px;
+  margin: 20px 0;
+}
+
+.settings{
+  display: flex;
+  justify-content: start;
+  margin-top: 1rem;
+}
+
+.selection{
+  width: 100%;
+  text-align: left;
+}
+
+.selection input{
+  width: 50px;
+}
+
+.generate{
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.generate button{
+  padding: 10px;
+  min-width: 200px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.output{
+  margin-top: 10px;
+  min-height: 300px;
+  width: 100%;
+}
+.generated{
+  width: 400px;
+  height: 400px;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.generated img{
+  width: 100%;
+}
