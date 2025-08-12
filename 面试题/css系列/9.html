@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul class="box"></ul>
+  <!-- <script>
+    // let box = document.querySelector('.box')
+    // box.style.width = '100px'
+    // box.style.width = '101px'
+    // box.style.width = '102px'
+    // box.style.width = '103px'
+    // box.style.width = '104px'
+    
+    let el = document.getElementById('app');
+    el.style.width = (el.offsetWidth+1) + 'px';
+    el.style.width = 1 + 'px'
+  </script> -->
+
+  <script>
+    let ul = document.querySelector('.box')
+    // ul.style.display = 'none'
+    // let frag = document.createDocumentFragment()  // 文档碎片
+    let newUl = ul.cloneNode(true)
+    
+
+    for (let i = 0; i < 200; i++) {
+      let li = document.createElement('li')
+      li.innerHTML = i
+      newUl.appendChild(li)
+    }
+    // ul.style.display = 'block'
+    // ul.appendChild(frag)
+    ul.parentNode.replaceChild(newUl, ul)
+  </script>
+</body>
+</html>
