@@ -130,6 +130,30 @@
      Object.assign({}, obj),
      arr.toReversed().reverse()
 
-    - 深拷贝: JSON.parse(JSON.stringify(obj))
+    - 深拷贝: 
+     JSON.parse(JSON.stringify(obj)) --- 不能处理 undefined 、Symbol、Bigint、function、循环引用
 
- - 原理
+     structuredClone(obj) --- 不能处理 Symbol、bigint、function
+
+     MessageChannel() --- 不能处理 function, symbol
+
+     - 原理
+       深递归: 递归拷贝, 判断是否是引用类型, 如果是则递归拷贝, 直到拷贝的属性值是原始类型就直接赋值
+
+
+
+# 6. 说说你对闭包的理解
+ - 是什么
+  闭包是一个集合 根据作用域的查找规则, 内部函数一定有权力可以访问外部函数的变量, 另外 , 一个函数执行完后它的执行上下文会被销毁。 那么在一个函数A 里面声明了一个函数 B, 而函数 B 被拿到了 函数A 的外部调用执行, 为了保证以上两条规则正常执行, A 函数在执行完毕后 销毁不会彻底 而是会留下一个集合在调用栈中, 保存 函数A 中会被 函数B 需要访问的变量, 这个集合就是闭包
+
+ - 特点: 
+ 1. 用于封装模块, 避免全局变量污染
+ 2. 延长了变量的生命周期 
+ 
+ 3. 造成内存泄漏
+
+ - 场景:
+ 1. 柯理化
+ 2. 单例模式
+ 3. 防抖节流
+ 
