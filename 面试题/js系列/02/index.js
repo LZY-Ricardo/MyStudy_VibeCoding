@@ -1,4 +1,4 @@
-const arr = [1, [2, [3, [4]]]]  // [1, 2, 3, 4]
+const arr = [1, [2, [3, [4]]], 5, [6, 7]]  // [1, 2, 3, 4]
 
 // console.log(arr.flat(Infinity));
 
@@ -30,6 +30,8 @@ const arr = [1, [2, [3, [4]]]]  // [1, 2, 3, 4]
 function flatten(arr) {
   while (arr.some(item => Array.isArray(item))) {
     arr = [].concat(...arr)
+    console.log(arr);
+    
   }
   return arr
 }

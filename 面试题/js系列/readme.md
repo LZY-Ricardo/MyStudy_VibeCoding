@@ -204,6 +204,121 @@
     6. 寄生组合式继承 -- 最优解
 
     7. 类继承 -- 利用 extends 关键字实现继承
+ ## Object.create() 和 new Object() 的区别
+  ### 1. 基本概念
+   #### Object.create()
+      - 创建一个新对象，使用指定的原型对象和属性
+      - 可以精确控制新对象的原型链
+
+   #### new Object()
+      - 创建一个普通的空对象
+      - 原型链指向 Object.prototype
+
+  ### 2. 语法差异
+
+      ```javascript
+      // Object.create()
+      const obj1 = Object.create(proto)           // 指定原型
+      const obj2 = Object.create(null)            // 无原型
+      const obj3 = Object.create(proto, properties) // 指定原型和属性
+
+      // new Object()
+      const obj4 = new Object()                   // 等同于 {}
+      const obj5 = Object()                       // 等同于 new Object()
+      ```
+
+   ### 3. 原型链控制
+
+      ```javascript
+      // Object.create() - 可以指定原型
+      const parent = { name: 'parent' }
+      const child = Object.create(parent)
+      console.log(child.__proto__ === parent) // true
+
+      // new Object() - 固定原型
+      const obj = new Object()
+      console.log(obj.__proto__ === Object.prototype) // true
+      ```
+
+   ### 4. 创建纯净对象
+
+      ```javascript
+      // Object.create(null) - 创建无原型对象
+      const pureObj = Object.create(null)
+      console.log(pureObj.toString) // undefined
+      console.log(pureObj.__proto__) // undefined
+
+      // new Object() - 总是有原型
+      const normalObj = new Object()
+      console.log(normalObj.toString) // function toString() { [native code] }
+      ```
+
+   ### 5. 属性描述符
+
+      ```javascript
+      // Object.create() 可以同时定义属性
+      const obj = Object.create(null, {
+        name: {
+          value: 'test',
+          writable: true,
+          enumerable: true,
+          configurable: true
+        }
+      })
+
+      // new Object() 需要后续添加属性
+      const obj2 = new Object()
+      obj2.name = 'test'
+      ```
+
+   ### 6. 使用场景
+
+      ### Object.create() 适用于：
+      - 实现继承
+      - 创建字典对象（无原型污染）
+      - 需要精确控制原型链
+
+      ```javascript
+      // 继承示例
+      function Parent() {}
+      Parent.prototype.sayHello = function() { console.log('Hello') }
+
+      function Child() {}
+      Child.prototype = Object.create(Parent.prototype)
+      Child.prototype.constructor = Child
+
+      // 字典对象
+      const dict = Object.create(null)
+      dict['toString'] = 'safe' // 不会覆盖原型方法
+      ```
+
+      ### new Object() 适用于：
+      - 创建普通对象
+      - 需要使用 Object 原型方法
+
+      ```javascript
+      const user = new Object()
+      user.name = 'John'
+      user.toString() // 可以使用原型方法
+      ```
+
+   ### 7. 性能对比
+
+      - `new Object()` 和 `{}` 性能相近，都很快
+      - `Object.create()` 稍慢，因为需要设置原型链
+      - `Object.create(null)` 创建的对象访问属性更快（无原型链查找）
+
+   ### 8. 总结
+
+      | 特性 | Object.create() | new Object() |
+      |------|----------------|-------------|
+      | 原型控制 | 可自定义 | 固定为 Object.prototype |
+      | 纯净对象 | 支持 (null) | 不支持 |
+      | 属性定义 | 支持描述符 | 需要后续添加 |
+      | 继承实现 | 推荐 | 不适合 |
+      | 性能 | 稍慢 | 较快 |
+      | 使用复杂度 | 较高 | 简单 |
+              
 
 
 
@@ -216,3 +331,106 @@
   2. 函数被对象调用 --- 隐式绑定规则 --- this 指向调用对象
   3. call, apply, bind --- 显示绑定规则 --- this 指向绑定的对象
   4. new 绑定规则 --- 构造函数绑定规则 --- this 指向新创建的对象
+
+
+# 11. 说一说 js 中的事件流
+ - 是什么
+ js 中的事件流指的是事件在 DOM 传播顺序
+
+ - 特点
+ 1. 事件从 window 上往目标元素传播 (捕获阶段)
+ 2. 事件在目标元素触发 (目标阶段)
+ 3. 事件从目标元素往 window 传播 (冒泡阶段)
+
+- 使用场景
+   借助事件冒泡机制, 实现事件委托
+
+
+# 12. js 中的类型判断有哪些方法
+ 1. typeof 只能判断除了 null 之外的原始类型 和 function
+ 2. instanceof 只能判断引用类型, 不能判断原始类型
+ 3. Array.isArray()
+ 4. Object.prototype.toString.call(xx) --- 让 xx 调用 Object 原型上的 toString 方法, 并返回一个字符串
+
+
+  - 对象上的 toString --- 返回一个 由 '[object' 和 内部属性 [[Class]] 和 ']' 组成的字符串
+  - 数组上的 toString --- 返回一个由数组元素组成的字符串, 每个元素之间用逗号隔开
+  - 其他类型上的 toString --- 返回一个字符串字面量, 如 '123'
+
+
+
+# 13. 说说你对 js 事件循环的理解
+ - 是什么
+  因为 js 默认是单线程运行, 所以事件循环是指 js 引擎在执行代码时, 遇到耗时任务就会发生阻塞, 为了解决这个问题, js 设计了一套循环执行同步和异步的机制, 这个机制就是事件循环机制。 事件循环机制的核心是任务队列, 任务队列分为宏任务队列和微任务队列, 宏任务队列中存放的是宏任务, 微任务队列中存放的是微任务, 事件循环机制的执行顺序是: 先执行同步代码, 然后执行微任务队列中的任务, 最后执行宏任务队列中的任务, 宏任务队列中的任务执行完成后, 会检查微任务队列是否为空, 如果不为空, 会继续执行微任务队列中的任务, 直到微任务队列为空, 然后再执行宏任务队列中的任务, 这个过程会一直循环执行, 直到宏任务队列和微任务队列都为空, 这个过程就是事件循环机制
+
+
+ - 特点
+  - 同步任务(同步代码): 立即执行的任务
+  - 异步任务(异步代码): 不会立即执行的任务, 会被放到任务队列中等待执行
+      - 宏任务: script(整体代码), setTimeout, setInterval, setImmediate, I/O, UI 渲染, setImmediate, MessageChannel, postMessage, Web Workers
+      - 微任务: Promise.then, MutationObserver, process.nextTick(node中优先级更高)
+
+      1. 先执行同步代码
+      2. 执行微任务队列中的任务
+      3. 有需要的话进行渲染, 如 DOM 变化, 样式变化, 位置变化等
+      4. 执行宏任务队列中的任务
+      5. 检查微任务队列是否为空, 如果不为空, 会继续执行微任务队列中的任务, 直到微任务队列为空, 然后再执行宏任务队列中的任务, 这个过程会一直循环执行, 直到宏任务队列和微任务队列都为空, 这个过程就是事件循环机制
+
+
+
+# 14. 说说 js 中的防抖节流
+ - 是什么
+  是一种优化手段, 比如搜索框的输入, scroll, click 等可能会在短时间内出现多次, 非常浪费资源, 防抖节流就是为了优化这种情况。
+
+ - 特点
+  - 防抖: 在规定的时间内, 如果没有再次触发事件, 则执行最后一次触发的事件
+  - 节流: 在规定的时间内, 只执行一次事件
+
+ - 实现
+  - 防抖: 通过闭包保存定时器变量，接收回调函数和延迟时间作为参数。每次事件触发时清除之前的定时器并重新设置，确保只有在事件停止触发后才会执行回调函数。
+    实现要点：
+    1. 使用闭包保存定时器变量
+    2. 每次触发清除前一个定时器
+    3. 重新设置定时器，延迟执行回调
+    4. 通过apply保持正确的this指向和参数传递
+
+  - 节流: 通过闭包保存上次执行时间戳，接收回调函数和间隔时间作为参数。每次事件触发时比较当前时间与上次执行时间，只有超过间隔时间才会执行回调并更新上次执行时间。
+    实现要点：
+    1. 使用闭包保存上次执行时间
+    2. 每次触发比较当前时间与上次执行时间
+    3. 超过间隔时间才执行回调
+    4. 执行后更新上次执行时间
+    5. 通过apply保持正确的this指向和参数传递
+  - 区别: 防抖是在规定的时间内, 如果没有再次触发事件, 则执行最后一次触发的事件, 而节流是在规定的时间内, 只执行一次事件, 不管事件触发了多少次, 都只执行一次。
+
+
+# 15. js 中的本地存储有哪些, 区别是什么?
+ 1. Cookies (JS 可以通过 `document.cookie` 对非 `HttpOnly` 的 Cookie 进行读写操作，后端也可以通过响应头设置 Cookie。`HttpOnly` 的 Cookie 无法通过 JS 访问和修改)
+  - 大小: 4k
+  - 方式: key-value
+  - 过期时间: 可以设置过期时间, 不设置默认关闭浏览器就过期
+  - 工作原理: 浏览器会在每次请求时, 将 cookies 中的内容添加到请求头中, 后端可以通过请求头来获取 cookies 中的内容, 也可以通过响应头来设置 cookies
+  - 跨域: 可以设置跨域, 子域名可以访问父域名的 cookies, 父域名不能访问子域名的 cookies
+  https://www.baidu.com/
+  https://tieba.baidu.com/
+
+ 2. Local storage
+ - 大小: 5M
+ - 过期时间: 不可以设置过期时间, 默认永远存在
+ - 工作原理: 需要 js 手动存取
+ - 跨域: 不可以跨域
+
+ 3. Session storage
+ - 大小: 5MB 左右
+ - 过期时间: 页面关闭就过期
+ - 工作原理: 需要 js 手动存取
+ - 跨域: 不可以跨域
+
+ 4. indexDB (纯客户端的本地数据库)
+  - 大小: 理论上无穷大
+  - 过期时间: 不可以设置过期时间, 默认永久存在
+  - 工作原理: 需要 js 手动存取, 支持二进制
+  - 跨域: 不可以跨域
+  - 适用场景:
+   - 存储大量数据
+   - 需要离线访问
