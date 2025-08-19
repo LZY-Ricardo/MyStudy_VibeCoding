@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>二级页面 --- <span id="span"></span></h2>
+    <!-- <script>
+        window.onmessage = function(e) {
+            console.log(`从一级页面接收的数据: ${e.data}`);
+            document.getElementById('span').innerHTML = e.data
+            const {age} = JSON.parse(e.data)
+            setTimeout(() => {
+                e.source.postMessage(`我是二级页面, 我收到了一级页面的消息, 我收到的消息中的年龄是: ${age}`, e.origin)
+            }, 2000)
+        }
+    </script> -->
+    <script>
+        document.domain = '127.0.0.1'
+        var data = '二级页面的数据'
+    </script>
+</body>
+</html>

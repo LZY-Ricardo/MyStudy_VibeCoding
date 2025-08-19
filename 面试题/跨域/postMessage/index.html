@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>一级页面</h1>
+    <iframe id="frame" src="http://127.0.0.1:8080/index2.html" frameborder="0"
+        style="width: 600px; height: 800px;"></iframe>
+    <!-- <script>
+        let obj = { name: 'xxx', age: 19 }
+        let frame = document.getElementById('frame')
+        frame.onload = function () {
+            this.contentWindow.postMessage(JSON.stringify(obj), 'http://127.0.0.1:8080')
+        }
+        window.onmessage = function (e) {
+            console.log(`从二级页面接收的数据: ${e.data}`);
+        }
+    </script> -->
+    <script>
+        document.domain = '127.0.0.1'
+        document.getElementById('frame').onload = function() {
+            console.log(this.contentWindow.data);
+        }
+
+    </script>
+</body>
+</html>
