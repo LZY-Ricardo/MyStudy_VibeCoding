@@ -1,0 +1,32 @@
+.container {
+    width: 400px;
+    height: 500px;
+    border: 1px solid #000;
+    margin: 0 auto;
+    overflow-y: scroll;
+    position: relative;
+}
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+li {
+    height: 50px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 50px;
+}
+.list-phantom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+/* .list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+} */
