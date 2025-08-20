@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 import ReactMarkdown from 'react-markdown'
-import rehypeRaw from 'rehype-raw'
+import rehypeRaw from 'rehype-raw'  
 import remarkGfm from 'remark-gfm'
 
 export default function App() {
@@ -14,10 +14,10 @@ export default function App() {
     if (!value) {
       return
     }
-    setList(prev => [...prev, {
-      role: 'user',
-      content: value
-    }])
+      setList(prev => [...prev, {
+        role: 'user',
+        content: value
+      }])
     axios.post('http://localhost:3000/chat', {
       role: 'user',
       content: value

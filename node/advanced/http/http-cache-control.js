@@ -17,46 +17,44 @@ const server = http.createServer((req, res) => {
         }
         if (fs.existsSync(filePath)) {
             const { ext } = path.parse(filePath)
-            // const timeStamp = req.headers['if-modified-since']
-            // let status = 200
-            // if (timeStamp && Number(timeStamp) === stat.mtimeMs) {
-            //     status = 304
-            // }
-            // const contentType = mime.getType(ext)
-            // res.writeHead(status, {
-            //     'Content-Type': contentType, charset: 'utf-8',
-            //     'Cache-Control': 'max-age=86400',
-            //     "last-modified": stat.mtimeMs,
-            // })
-            // if (status === 200) {
-            //     const fileStream = fs.createReadStream(filePath)
-            //     fileStream.pipe(res)
-            // } else {
-            //     res.end()
-            // }
-
-            checksum.file(filePath, (err, sum) => {
-                const resStream = fs.createReadStream(filePath)
-                sum = `"${sum}"`
-
-                if (req.headers['if-none-match'] === sum) {
-                    res.writeHead(304, {
-                        'Content-Type': mime.getType(ext),
-                        'Cache-Control': 'max-age=86400',
-                        'etag': sum
-                    })
-                    res.end()
-                } else {
-                    res.writeHead(200, {
-                        'Content-Type': mime.getType(ext), charset: 'utf-8',
-                        'Cache-Control': 'max-age=86400',
-                        "etag": sum
-                    })
-                    resStream.pipe(res)
-                }
-
-
+            const timeStamp = req.headers['if-modified-since']
+            let status = 200
+            if (timeStamp && Number(timeStamp) === stat.mtimeMs) {
+                status = 304
+            }
+            const contentType = mime.getType(ext)
+            res.writeHead(status, {
+                'Content-Type': contentType, charset: 'utf-8',
+                'Cache-Control': 'max-age=86400',
+                "last-modified": stat.mtimeMs,
             })
+            if (status === 200) {
+                const fileStream = fs.createReadStream(filePath)
+                fileStream.pipe(res)
+            } else {
+                res.end()
+            }
+
+            // checksum.file(filePath, (err, sum) => {
+            //     const resStream = fs.createReadStream(filePath)
+            //     sum = `"${sum}"`
+
+            //     if (req.headers['if-none-match'] === sum) {
+            //         res.writeHead(304, {
+            //             'Content-Type': mime.getType(ext),
+            //             'Cache-Control': 'max-age=86400',
+            //             'etag': sum
+            //         })
+            //         res.end()
+            //     } else {
+            //         res.writeHead(200, {
+            //             'Content-Type': mime.getType(ext), charset: 'utf-8',
+            //             'Cache-Control': 'max-age=86400',
+            //             "etag": sum
+            //         })
+            //         resStream.pipe(res)
+            //     }
+            // })
         }
     } else {
         res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' })

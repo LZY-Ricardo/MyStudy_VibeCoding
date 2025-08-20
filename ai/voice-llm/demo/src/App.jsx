@@ -24,7 +24,7 @@ export default function App() {
     const token = import.meta.env.VITE_ACCESS_TOKEN
     const appId = import.meta.env.VITE_APP_ID
     const clusterId = import.meta.env.VITE_CLUSTER_ID
-    const voiceName = 'zh_male_shenyeboke_moon_bigtts'
+    const voiceName = 'zh_female_meilinvyou_moon_bigtts'
 
     const endpoint = '/tts/api/v1/tts'
     const headers = {

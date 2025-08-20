@@ -14,7 +14,7 @@
 
 Object.prototype.toString.call()
 1. 如果 this value 未定义 ，则返回 “[object Undefined]”。
-2. 如果 this value 未定义 ，则返回 “[object Undefined]”。
+2. 如果 this value 为 null，则返回 “[object Null]”。
 3. 设 O 为调用 ToObject 的结果，将 this 值作为参数传递。
 4. 设 class 为 O 的 [[Class]] 内部属性的值。
 5. 返回 String 值，该值是连接三个字符串 “[object ”、class 和 “]” 的结果。
