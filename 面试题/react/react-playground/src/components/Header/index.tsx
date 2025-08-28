@@ -1,5 +1,5 @@
 import React from 'react'
-import logoSvg from './icons/logo_light.svg'
+import logoSvg from './icons/logo.svg'
 import styles from './index.module.scss'
 
 export default function Header() {

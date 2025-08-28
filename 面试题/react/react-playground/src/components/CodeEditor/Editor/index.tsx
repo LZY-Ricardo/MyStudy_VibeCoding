@@ -1,7 +1,7 @@
 import { Editor as MonacoEditor } from '@monaco-editor/react'
 import type { OnMount, EditorProps } from '@monaco-editor/react'
 import { editor } from 'monaco-editor'
-import { createATA } from '../ata'
+import { createATA } from './ata'
 
 // 定义文件类型
 interface EditorFile {
@@ -13,7 +13,7 @@ interface EditorFile {
 // 定义组件Props接口
 interface Props {
     file: EditorFile,
-    onChange?: EditorProps['onChange'],
+    onChange?: (value: string) => void,
     options?: editor.IStandaloneEditorConstructionOptions
 }
 
@@ -53,10 +53,15 @@ export default function Editor(props: Props) {
             }
         })
 
-        // 监听编辑器内容变化，触发类型获取
+        // 监听编辑器内容变化，触发类型获取和onChange回调
         editor.onDidChangeModelContent(() => {
             try {
-                ata(editor.getValue())
+                const currentValue = editor.getValue()
+                ata(currentValue)
+                // 调用onChange回调函数
+                if (onChange) {
+                    onChange(currentValue)
+                }
             } catch (error) {
                 console.warn('ATA处理时出错:', error)
             }
@@ -84,7 +89,6 @@ export default function Editor(props: Props) {
                 ...options,
             }}
             onMount={handleEditorMount}
-            onChange={onChange}
         />
     )
 }
