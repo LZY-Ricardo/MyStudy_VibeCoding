@@ -16,7 +16,7 @@ function myInstanceof(L, R) {
     //     if (proto === null) {
     //         return false;
     //     }
-
+    
     //     // 3.2 如果当前原型对象严格等于右侧构造函数的原型对象，说明找到了，返回 true
     //     if (proto === R.prototype) {
     //         return true;

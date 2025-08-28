@@ -15,7 +15,7 @@ function rewriteImport(content) {
 }
 
 const server = http.createServer((req, res) => {
-    const { url } = req
+    const { url } = req 
     if (url === '/') {
         res.writeHead(200, { 'Content-Type': 'text/html' })
         let content = fs.readFileSync('./index.html', 'utf-8')
