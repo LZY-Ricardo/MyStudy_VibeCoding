@@ -1,7 +1,10 @@
-import React from 'react'
+import './App.scss'
+import ReactPlayground from './ReactPlayground'
 
 export default function App() {
   return (
-    <div>App</div>
+    <div>
+      <ReactPlayground />
+    </div>
   )
 }

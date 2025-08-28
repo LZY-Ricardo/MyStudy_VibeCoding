@@ -16,6 +16,7 @@
 # @monaco-editor/react
  - 基于 monaco-editor 的 react 组件
  - 左侧的编辑器
+ - 编辑器中的 ts 代码提示 npm i @typescript/ata
 
 # 右侧的预览
  - iframe 预览
