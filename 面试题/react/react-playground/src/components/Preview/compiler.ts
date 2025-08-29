@@ -2,14 +2,24 @@ import { ENTRY_FILE_NAME } from '../../ReactPlayground/files'
 import { type Files, type File } from '../../ReactPlayground/PlaygroundContext'
 import { transform } from '@babel/standalone'
 
+export const beforeTransform = (filename: string, code: string) => {
+    let _code = code
+    const regexReact = /import\s+React/g
+    if ((filename.endsWith('.jsx') || filename.endsWith('.tsx')) && !regexReact.test(code)) {
+        _code = `import React from 'react';\n${_code}`
+    }
+    return _code
+}
+
 export const babelTransform = (filename: string, code: string, files: Files) => {
     // 将 code 进行编译
+    let _code = beforeTransform(filename, code) // 处理 import React from 'react' 没有则引入
     let result = ''
     try {
-        result = transform(code, {
+        result = transform(_code, {
             filename,
             presets: ['react', 'typescript'],
-            plugins: [customResolver(files)], // 将 from 'react' 替换为 from 'blob://xxxxx'
+            plugins: [customResolver(files)], // 将 from './App.tsx' 替换为 from 'blob://xxxxx'
             retainLines: true, // 保持格式不变
         }).code!
         return result
@@ -24,6 +34,8 @@ export const compile = (files: Files) => {
     return babelTransform(ENTRY_FILE_NAME, main.value, files)
 }
 
+
+// 自定义 babel 插件 用于将 import 语句中的路径替换为 blob: 开头的路径
 function customResolver(files: Files) {
     return {
         visitor: {
@@ -65,11 +77,32 @@ export function getModuleFile(files: Files, modulePath: string) {
 }
 
 export function css2JS(file: File) {
-    const js = `export default ${file.value}`
+    // const js = `export default ${file.value}`
+    const randomId = new Date().getTime()
+    const js = `
+    (() => {
+      const style = document.createElement('style')
+      style.setAttribute('id', 'style_${randomId}_${file.name}')
+      document.head.appendChild(style)
+
+      const styleText = document.createTextNode(\`${file.value}\`)
+      style.innerHTML = ''
+      style.appendChild(styleText)
+    })()
+  `
     return URL.createObjectURL(new Blob([js], { type: 'application/javascript' }))
 }
 
 export function json2JS(file: File) {
     const js = `export default ${file.value}`
-    return URL.createObjectURL(new Blob([js], { type: 'application/javascript' }))
+    return URL.createObjectURL(new Blob([js], { type: 'application/javascript' }))  
 }
+
+
+
+
+
+
+
+
+
