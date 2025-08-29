@@ -13,7 +13,7 @@ interface EditorFile {
 // 定义组件Props接口
 interface Props {
     file: EditorFile,
-    onChange?: (value: string) => void,
+    onChange?: EditorProps['onChange'];
     options?: editor.IStandaloneEditorConstructionOptions
 }
 
@@ -58,10 +58,6 @@ export default function Editor(props: Props) {
             try {
                 const currentValue = editor.getValue()
                 ata(currentValue)
-                // 调用onChange回调函数
-                if (onChange) {
-                    onChange(currentValue)
-                }
             } catch (error) {
                 console.warn('ATA处理时出错:', error)
             }
@@ -89,6 +85,7 @@ export default function Editor(props: Props) {
                 ...options,
             }}
             onMount={handleEditorMount}
+            onChange={onChange}
         />
     )
 }
