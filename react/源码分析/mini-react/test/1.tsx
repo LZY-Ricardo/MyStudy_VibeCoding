@@ -1,4 +1,3 @@
-"use strict";
 // let buttonNode = (
 //   <button
 //     {...rest}
@@ -7,4 +6,6 @@
 //     onClick={handleClick}
 //   >按钮</button>
 // )
+
+
 // jsx  ==>  render function   ==>  virtual dom

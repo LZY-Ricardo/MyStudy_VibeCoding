@@ -1,0 +1,22 @@
+{
+  "type": "div",
+  "props": {
+    "children": [
+      {
+        "type": "a",
+        "props": {
+          "href": "xxx",
+          "children": [
+            {
+              "type": "TEXT_ELEMENT",
+              "props": {
+                "nodeValue": "link",
+                "children": []
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
