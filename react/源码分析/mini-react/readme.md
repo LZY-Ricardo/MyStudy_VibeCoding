@@ -16,9 +16,18 @@ react 中的 diff 算法是用来比较 fiber 节点的差异的, 从而确定�
 
 
 # 总结
-1. render 阶段: 把 jsx --》 vdoom --》 fiber 链表
+1. render 阶段: 把 jsx --》 vdom --》 fiber 链表
 2. commit 阶段: 把 fiber 链表渲染到页面上
 
 # MiniReact
 1. 借助 tsc 编译 jsx
-2. 配置 tsconfig.json, 设置 tsc 在编译时
+2. 配置 tsconfig.json, 设置 tsc 在编译 jsx 时启动 MiniReact.createElement
+3. 得到了 vdom 树, 将 vdom 树转换成 fiber 链表
+4. 递归遍历 fiber 链表, 根据节点的特性来生成对应的 dom 节点, 并将 dom 节点挂载到对应的父节点上
+
+# diff 
+- diff 算法是 react 中一个用来比较 fiber 节点的差异的算法, 只会比较同层的节点
+- 核心过程:
+    1. 判断新老节点类型是否相同, 如果类型相同, 复用老节点 dom, 更新新节点的 props 属性
+    2. 如果类型不同, 且存在新节点, 用新的节点直接替换
+    3. 如果类型不同, 且不存在新节点, 直接删除老节点
