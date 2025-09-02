@@ -1,19 +1,17 @@
 function A() {
-    try {
-        setTimeout(() => {
-            console.log('A');
-            // B()
-            throw new Error('A错误')
-        }, 1000)
-    } catch (error) {
-        console.log('error:', error);
-    }
+  try {
+    setTimeout(() => {
+      console.log('A')
+      B()
+    }, 1000)
+  } catch (error) {
+    console.log('A错误', error)
+  }
 }
 function B() {
-    setTimeout(() => {
-        console.log(B)
-        throw new Error('B错误')
-    }, 1000)
+  setTimeout(() => {
+    console.log('B')
+  }, 500)
 }
 A()
-// B()
+

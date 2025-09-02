@@ -79,46 +79,226 @@ class MyPromise {
         })
         return newPromise
     }
-    catch(onRejected) {
-        // onRejected 被存起来
-        onRejected = typeof onRejected === 'function' ? onRejected : (reason) => { throw reason }
+    static race(promises) {
+        return new MyPromise((resolve, reject) => {
+            for (let promise of promises) {
+                promise.then(
+                    (value) => {
+                        resolve(value)
+                    },
+                    (reason) => {
+                        reject(reason)
+                    }
+                )
+            }
+        })
     }
+    static all(promises) {
+        const result = []
+        let count = 0
+        return new MyPromise((resolve, reject) => {
+            for (let i = 0; i < promises.length; i++) {
+                promises[i].then(
+                    (value) => {
+                        result[i] = value
+                        count++
+                        if (count === promises.length) {
+                            // console.log(result);
+                            resolve(result)
+                        }
+                    },
+                    (reason) => {
+                        reject(reason)
+                    }
+                )
+            }
+        })
+    }
+    static any(promises) {
+        const result = []
+        let count = 0
+        return new MyPromise((resolve, reject) => {
+            for (let i = 0; i < promises.length; i++) {
+                promises[i].then(
+                    (value) => {
+                        resolve(value)
+                    },
+                    (reason) => {
+                        count++
+                        result[i] = reason
+                        if (count === promises.length) {
+                            reject(new AggregateError(result, 'All promises were rejected'))
+                        }
+                    }
+                )
+            }
+        })
+    }
+    static resolve(value) {
+        return new MyPromise((resolve) => {
+            resolve(value)
+        })
+    }
+    static reject(reason) {
+        return new MyPromise((reject) => {
+            reject(reason)
+        })
+    }
+    finally(callback) {
+        // callback 无论成功失败都要执行
+        return this.then(
+            (value) => {
+                callback()
+                return value
+            },
+            (reason) => {
+                callback()
+                throw reason
+            }
+        )
+    }
+    static allSettled(promises) {
+        const result = []
+        let count = 0
+        return new MyPromise((resolve, reject) => {
+            for (let i = 0; i < promises.length; i++) {
+                promises[i].then(
+                    (value) => {
+                        result[i] = {
+                            status: 'fulfilled',
+                            value
+                        }
+
+                    },
+                    (reason) => {
+                        result[i] = {
+                            status: 'rejected',
+                            reason
+                        }
+
+                    }
+                ).finally(() => {
+                    count++
+                    if (count === promises.length) {
+                        resolve(result)
+                    }
+                })
+            }
+        })
+    }
+    catch(onRejected) {
+        // catch 实际上就是 then(null, onRejected) de
+        return this.then(undefined, onRejected)
+    }
+
 }
 
-let p = new MyPromise((resolve, reject) => {
-//    setTimeout(() => {
-//         resolve('ok1')
-//         // reject('fail555')
-//     }, 0)
-    // resolve('ok1')
-    reject('fail555')
-})
-p.then((res) => {
-    console.log('成功then1', res);
-    // return 'ok2'
-    test(123)
-}, (err) => {
-    console.log('失败', err);
-})
+// let p = new MyPromise((resolve, reject) => {
+// //    setTimeout(() => {
+// //         resolve('ok1')
+// //         // reject('fail555')
+// //     }, 0)
+//     // resolve('ok1')
+//     reject('fail555')
+// })
+// p.then((res) => {
+//     console.log('成功then1', res);
+//     // return 'ok2'
+//     test(123)
+// }, (err) => {
+//     console.log('失败', err);
+// })
 // .then((res) => {
 //     console.log('成功then2', res);
 // })
-.catch((err) => {
-    console.log('失败', err);
-})
+// .catch((err) => {
+//     console.log('失败', err);
+// })
 
-function test(a) {
-    return new MyPromise((resolve, reject) => {
-        setTimeout(() => {
-            console.log(a);
-            // resolve('ok1')
-            reject('fail')
-        }, 1000)
-    })
-}
+// function test(a) {
+//     return new MyPromise((resolve, reject) => {
+//         setTimeout(() => {
+//             console.log(a);
+//             // resolve('ok1')
+//             reject('fail')
+//         }, 1000)
+//     })
+// }
 
 // test(123).then((res) => {
 //     console.log('成功', res);
 // }).catch((err) => {
 //     console.log('失败', err);
 // })
+
+
+function A() {
+    return new MyPromise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('A');
+            // reject('A fail')
+            resolve('A success')
+        }, 1500)
+    })
+}
+function B() {
+    return new MyPromise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('B');
+            reject('B fail')
+            resolve('B success')
+        }, 500)
+    })
+}
+function C() {
+    return new MyPromise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('C');
+            reject('C fail')
+            resolve('C success')
+        }, 1000)
+    })
+}
+
+// MyPromise.race([A(), B(), C()]).then(
+//     (res) => {
+//     console.log(res);
+//     },
+//     (err) => {
+//         console.log(err);
+//     }
+// )
+
+
+// MyPromise.all([A(), B(), C()]).then(
+//     (res) => {
+//         console.log(res);
+//     },
+//     (err) => {
+//         console.log(err);
+//     }
+// )
+
+// MyPromise.any([A(), B(), C()]).then(
+//     (res) => {
+//         console.log(res);
+//     },
+//     (err) => {
+//         console.log(err);
+//     }
+// )
+
+A().finally((res) => {
+    console.log('finally',res);
+}).then(res => {
+    console.log(res);
+})
+
+// MyPromise.allSettled([A(), B(), C()]).then(
+//     (res) => {
+//         console.log(res);
+//     },
+//     (err) => {
+//         console.log(err);
+//     }
+// )
