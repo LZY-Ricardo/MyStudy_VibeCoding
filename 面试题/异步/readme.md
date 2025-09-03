@@ -115,3 +115,25 @@
  - ✅ 支持链式调用和错误传播
  - ⚠️ 使用setTimeout模拟微任务（实际应该使用queueMicrotask）
  - ⚠️ 缺少Promise解析过程（处理返回值为Promise的情况）
+
+
+
+
+
+ # Generator 函数
+ - 生成器函数:
+ 1. 函数中可以使用 yield 关键字, yield 关键字可以暂停函数的执行
+ 2. 生成器函数调用后不会立即执行, 而是返回一个迭代器对象
+ 3. 迭代器对象包含一个 next 方法, 调用一次 next 方法, 就会执行到一个 yield 后面的表达式, next 接收参数
+ 4. 该对象包含 value 属性和 done 属性
+ 5. value 属性表示 yield 后面的表达式的值
+ 6. done 属性表示函数是否执行完毕
+
+
+# async await
+ - async await 原理:
+ 1. async 函数返回一个 promise 对象
+ 2. await 关键字只能在 async 函数中使用
+ 3. await 关键字后面接一个 promise 对象, 会将 promise 对象中 resolve 出来的值读取到, 也可以接一个普通的值, 但如果是普通的值, 就不具备处理异步的能力
+
+ async await = Generator 函数 + co 库 + promise
