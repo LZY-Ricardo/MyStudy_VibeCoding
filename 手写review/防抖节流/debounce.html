@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击我</button>
+</body>
+<script>
+    const btn = document.querySelector('#btn')
+
+    function clickFn(e) {
+        console.log('点击了按钮', this, e)
+    }
+    const delay = 500
+    btn.addEventListener('click', debounce(clickFn, delay))
+
+    function debounce(fn, delay) {
+        let timer = null
+        return function(...args) {
+            clearTimeout(timer)
+            timer = setTimeout(() => {
+                fn.apply(this, args)
+            }, delay)
+        }
+    }
+</script>
+</html>
