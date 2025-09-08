@@ -1,5 +1,5 @@
 Array.prototype.myReduce = function (callback, initialValue) {
-    if (this == null) { // 处理 this 为 null 或者 undefined 情况
+    if (this === null || this === undefined) { // 处理 this 为 null 或者 undefined 情况
         throw new TypeError('Array.prototype.reduce called on null or undefined')
     }
     if (typeof callback !== 'function') { 
