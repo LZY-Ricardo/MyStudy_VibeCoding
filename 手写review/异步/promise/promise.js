@@ -361,15 +361,25 @@ function C() {
 //     });
 
 
-myPromise.resolve('成功')
-    .finally(() => {
-        // return myPromise.reject('finally 拒绝');
-        return myPromise.resolve('finally 接收')
-    })
-    .then(value => {
-        console.log(value);
+// myPromise.resolve('成功')
+//     .finally(() => {
+//         // return myPromise.reject('finally 拒绝');
+//         return myPromise.resolve('finally 接收')
+//     })
+//     .then(value => {
+//         console.log(value);
         
-    })
-    .catch(error => {
-        console.log(error); // 输出: 'finally 拒绝'
-    });
+//     })
+//     .catch(error => {
+//         console.log(error); // 输出: 'finally 拒绝'
+//     });
+
+
+
+function next(value) {
+    console.log(value);
+
+}
+
+myPromise.resolve(123)
+    .then(next)
