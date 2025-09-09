@@ -46,7 +46,7 @@ let arr = [1, 2, [3, 4], 5, [6, [7, 8, [9]]], 10]
 function flatten3(arr) {
     while (arr.some(item => Array.isArray(item))) {
         console.log('s:',arr);
-        console.log([...arr]);
+        console.log(...arr);
         
         arr = [].concat(...arr)
         console.log('f:',arr);
