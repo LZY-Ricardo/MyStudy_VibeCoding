@@ -11,17 +11,18 @@ const config = {
 };
 
 function getValue(data, path, defaultValue = undefined) {
-    if (!path) {
+    if (!path) { // 空路径返回默认值
         return defaultValue
     }
 
+    // 处理路径中的 .. 和 [] 语法
     path = path.replace(/\.\.+/g, '.').replace(/\[(-?\d+)\]/g, '.$1')
     // console.log(path);
 
     const pathArr = path.split('.')
 
     let current = data
-    for (let key of pathArr) {
+    for (let key of pathArr) { // 遍历路径数组
         if (Array.isArray(current) && key < current.length) {
             if (key >= 0) {
                 current = current[key]
