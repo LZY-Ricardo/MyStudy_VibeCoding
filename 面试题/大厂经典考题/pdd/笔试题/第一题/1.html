@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="input" type="text">
+    <script>
+        const input = document.getElementById('input');
+        async function searchGoods(keyword) {
+            // 模拟接口调用
+            await new Promise(resolve => setTimeout(resolve, 500));
+            return [keyword + '商品1', keyword + '商品2'];
+        }
+        const hotKeys = ['iPhone', 'iPad', '华为', '小米'];
+        function createSearchManager() {
+            // TODO: 实现剩余代码
+            let timer = null
+            let requestID = 0
+            let currentID = 0
+
+            return function (keyword) {
+                if (keyword == '') {
+                    clearTimeout(timer)
+                    console.log('重新搜索');
+                    return
+                }
+                // 请补充代码
+                // 1. 匹配字典
+                let str = '猜你想搜：'
+                const res = hotKeys.filter((item) => {
+                    item = item.toLowerCase();
+                    keyword = keyword.toLowerCase();
+                    return item.includes(keyword)
+                })
+                if (res.length) {
+                    str += res.join(',')
+                    console.log(str);
+                }
+
+                // 2.
+                clearTimeout(timer)
+                timer = setTimeout(() => {
+                    if (currentID === requestID) {
+                        // console.log(currentID, requestID);
+                        currentID++
+                        searchGoods(keyword).then((res) => {
+                            requestID++
+                            console.log(res);
+                        })
+                    }
+                }, 500)
+            };
+        }
+        const searchManager = createSearchManager();
+        input.addEventListener('input', handle)
+        async function handle(e) {
+            const keyword = e.target.value;
+            const res = await searchManager(keyword);
+        }
+        function debounce(fn, delay) {
+            let timer = null
+            return function(...args) {
+                clearTimeout(timer)
+                setTimeout(() => {
+                    fn.apply(this, args)
+                }, delay)
+                if (args[0].target.value.trim() === null) clearTimeout(timer)
+            }
+        }
+    </script>
+</body>
+
+</html>
