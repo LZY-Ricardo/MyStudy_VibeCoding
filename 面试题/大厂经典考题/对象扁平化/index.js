@@ -17,6 +17,9 @@ let output = {
     'd.e': 2,
     'd.f': 3,
     g: null,
+    h: 'function() {},',
+    e: '2023-08-10T08:00:00.000Z',
+    i: '\\w+',
 }
 
 // console.log(output);

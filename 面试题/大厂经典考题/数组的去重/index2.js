@@ -67,6 +67,17 @@ function unique(arr) {
     return res
 }
 
+function unique2(arr) { // 使用 reduce 方法实现去重
+  return arr.reduce((prev, curr) => {
+    // 判断当前元素是否已经在结果数组中
+    const isExist = prev.some(item => equal(item, curr));
+    if (!isExist) {
+      prev.push(curr);
+    }
+    return prev;
+  }, []);
+}
+
 function equal(v1, v2) {
     if ((typeof v1 === 'object' && v1 !== null) && (typeof v2 === 'object' && v2 !== null)) {
         if (Object.keys(v1).length !== Object.keys(v2).length) {
@@ -135,7 +146,7 @@ function equal(v1, v2) {
     return false;
 }
 console.log('equal函数测试结果:');
-console.log('基本测试:', unique(arr));
+console.log('基本测试:', unique2(arr));
 
 // 测试更复杂的用例
 let complexArr = [
@@ -148,7 +159,7 @@ let complexArr = [
     { name: '赵六', age: 20, data: null }
 ]
 
-console.log('复杂数组测试:', unique(complexArr));
+console.log('复杂数组测试:', unique2(complexArr));
 
 // 测试equal函数的各种边界情况
 console.log('测试equal函数:');

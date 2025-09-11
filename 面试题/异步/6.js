@@ -2,7 +2,7 @@ function A() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             console.log('A');
-            reject('A fail')
+            // reject('A fail')
             resolve('A success')
         }, 1500)
     })

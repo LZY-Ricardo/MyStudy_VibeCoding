@@ -13,6 +13,9 @@ function clone(origin) {
 let child1 = clone(parent)
 let child2 = clone(parent)
 child1.like.push('d')
+console.log(child1.__proto__);
+console.log(child2);
+
 console.log(child1.like);
 console.log(child2.like);
 console.log(child1.getLike());

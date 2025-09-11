@@ -1,0 +1,62 @@
+.chat-container {
+    width: 400px;
+    height: 500px;
+    border: 1px solid #e0e0e0;
+    margin: 20px auto;
+    overflow-y: auto;
+    position: relative;
+    background-color: #f5f5f5;
+    padding: 10px;
+    /* 优化滚动性能，减少闪动 */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    will-change: scroll-position;
+}
+
+.list-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    /* 不影响滚动 */
+}
+
+.visible-list {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    /* 启用硬件加速，减少重绘和回流 */
+    transform: translateZ(0);
+    will-change: transform;
+    /* 平滑的位置变化过渡 */
+    transition: transform 0.1s ease-out;
+}
+
+.message-item {
+    margin-bottom: 15px;
+    max-width: 70%;
+}
+
+.message-item.me {
+    margin-left: auto;
+}
+
+.message-bubble {
+    padding: 10px 15px;
+    border-radius: 18px;
+    word-break: break-all;
+    /* 让长文本自动换行 */
+}
+
+.message-item.me .message-bubble {
+    background-color: #0078d7;
+    color: white;
+}
+
+.message-item.other .message-bubble {
+    background-color: white;
+    color: #333;
+    border: 1px solid #e0e0e0;
+}

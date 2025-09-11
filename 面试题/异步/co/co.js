@@ -3,6 +3,9 @@ const co = require('co')
 function asyncFunction(num) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
+            if (num === 1) {
+                reject('num不能为1')    
+            }
             resolve(num)
         }, 1000)
     })
@@ -17,4 +20,7 @@ function* generatorFunction() {
 co(generatorFunction)
 .then((res) => {
     console.log(res);
+})
+.catch((err) => {
+    console.log(err);
 })
