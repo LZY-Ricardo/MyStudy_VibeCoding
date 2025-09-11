@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* input[type="range"] {
+            background-color: #c0de3c;
+        } */
+        /* input[type="range"]::-webkit-slider-runnable-track {
+            -webkit-appearance: none;
+            background-color: chocolate;
+        } */
+        .dom {
+            color: rgb(73, 160, 254);
+        }
+        .root {
+            color: rgb(72, 195, 51);
+            border: 1px solid #24e474;
+        }
+    </style>
+</head>
+<body>
+    <div class="dom">我是真实dom</div>
+    <div class="root">shadow host</div>
+    <input type="range">
+    <script>
+        const root = document.querySelector('.root')
+        const shadowRoot = root.attachShadow({ mode: 'open' })
+        const template = `
+            <div class="dom">shadow dom</div>
+            <style>
+                :host{
+                    border: 1px solid blue;
+                    color: blue;
+                }
+            </style>
+        `
+        shadowRoot.innerHTML = template
+        document.addEventListener('click', e => {
+            console.log(e.target)
+        })
+    </script>
+</body>
+
+</html>
