@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        div {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Block 1 -->
+    <div v-if="1 + 1 === 2" class="div1">“去哪儿”认识到在线旅游市场的用户需求已经逐渐变化...</div>
+    <div v-else-if="1 + 1 === 2" class="div-else-if-after-true-if">这个 v-else-if 紧跟在一个 true 的 v-if 后面，所以它不应该显示。</div>
+
+    <!-- Block 2 -->
+    <div v-if="1 + 1 !== 2" class="div2">2012年12月，去哪儿顺利通过PCI认证...</div>
+    <div v-else-if="1 + 2 === 3" class="div3">2024年8月，中国信息通信研究院发起的“卓信大数据计划”...</div>
+    <div v-else-if="false" class="div4">2022年1月，去哪儿旅行App获得移动互联网应用程序（App）安全认证证书...</div>
+
+    <!-- v-show elements -->
+    <div v-show="true" class="div5">2023年6月21日，去哪儿平台数据出境申报获得国家网信办批准...</div>
+    <div v-show="false" class="div6">“去哪儿”为旅游者提供国内外机票、酒店、会场、度假和签证服务的深度搜索...</div>
+
+    <!-- non-directive element -->
+    <span class="span1">“去哪儿”是通往中国旅游市场，以及接触广大在线旅游消费者的通行证...</span>
+
+    <script>
+        const rootElement = document.querySelector('body');
+        const children = Array.from(rootElement.children);
+        // console.log(children);
+        
+
+        // 预处理：收集每个元素的 DOM 节点和指令信息（添加结构，不提前操作DOM）
+        const elementInfos = children.map(element => ({
+            element: element,
+            directive: findDirective(element) // 待实现：识别元素的指令（v-if/v-else-if/v-show）
+        }));
+
+        let ifBlockMet = false; // 跟踪v-if链是否已有条件满足
+
+        // 待补全：遍历静态结构，处理每个元素的指令逻辑
+        for (let i = 0; i < elementInfos.length; i++) {
+            const { element, directive } = elementInfos[i];
+
+            if (!directive) {
+                ifBlockMet = false; // 非指令元素 重置标记链
+                continue;
+            }
+
+            // 提取指令表达式并求值（待实现expressionFun函数）
+            const directiveValue = element.getAttribute(directive);
+            // console.log(directiveValue);
+            const result = expressionFun(directiveValue)();
+
+            // 待补全：v-if逻辑
+            if (directive === 'v-if') {
+                // 补充v-if相关逻辑代码
+                if (result) {
+                    // v-if 为true 显示元素 标记链已满足
+                    element.style.display = 'block';
+                    ifBlockMet = true
+                } else {
+                    // v-if 为false 隐藏元素 标记链未满足
+                    element.style.display = 'none';
+                    ifBlockMet = false; // v-else-if 依赖 v-if 链未满足
+                }
+            }
+            else if (directive === 'v-else-if') {
+                const prevInfo = elementInfos[i - 1];
+                const prevDirective = prevInfo ? prevInfo.directive : null;
+                // 合法性校验：前序必须是v-if/v-else-if，且当前链未满足
+                if (!/v-if|v-else-if/.test(prevDirective) || ifBlockMet) {
+                    element.parentNode.removeChild(element); // 移除不合法的v-else-if 或者 链已满足
+                }
+                // 补充v-else-if相关逻辑代码
+                if (result) {
+                    // v-else-if 为 true 显示元素 标记链已满足
+                    element.style.display = 'block';
+                    ifBlockMet = true
+                } else { // v-else-if 为 false 隐藏元素 标记链未满足
+                    element.style.display = 'none' // v-else-if 为 false 隐藏元素
+                    ifBlockMet = false; // v-else-if 依赖 v-if 链未满足
+                }
+            }
+            // 待补全：v-show逻辑
+            else if (directive === 'v-show') {
+                // 补充v-show相关逻辑代码
+                if (result) {
+                    // element.style.display = 'block';
+                    // element.setAttribute('style', 'display: block')
+                    // Object.assign(element.style, {
+                    //     display: 'block'
+                    // })
+                    element.style.cssText = 'display: block; color: red'
+                } else {
+                    element.style.display = 'none';
+                }
+            }
+        }
+
+        /**
+         * 待实现：判断元素是否包含v-if/v-else-if/v-show指令
+         * @param {HTMLElement} element - DOM元素
+         * @returns {string|undefined} 指令名称或undefined
+         */
+        function findDirective(element) {
+            // 补全代码...
+            for (const attr of element.attributes) {
+                // console.log(attr);
+                if (attr.name.startsWith('v-')) {
+                    // console.log(attr.name);
+                    return attr.name
+                }
+            }
+            return undefined
+        }
+
+        /**
+         * 待实现：将表达式字符串转为可执行函数（返回布尔值）
+         * @param {string} attrValue - 指令的表达式字符串（如"1+1===2"）
+         * @returns {function} 执行表达式的函数
+         */
+        function expressionFun(attrValue) {
+            // 补全代码...
+            return function () {
+                try {
+                    return eval(attrValue) // 表达式求值
+                } catch (error) {
+                    console.log(error);
+                    return false
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
