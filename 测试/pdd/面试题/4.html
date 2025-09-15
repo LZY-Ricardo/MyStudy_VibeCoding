@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>
+            <span>1</span>
+            <button>删除</button>
+        </li>
+        <li>
+            <span>2</span>
+            <button>删除</button>
+        </li>
+        <li>
+            <span>3</span>
+            <button>删除</button>
+        </li>
+        <li>
+            <span>4</span>
+            <button>删除</button>
+        </li>
+    </ul>
+    <script>
+        // const ul = document.querySelector('ul')
+        // ul.addEventListener('click', (e) => { // 事件冒泡 点击按钮 会触发ul的点击事件
+        //     console.log(e.target.tagName); // BUTTON
+        //     if (e.target.tagName === 'BUTTON') {
+        //         ul.removeChild(e.target.parentElement)
+        //     }
+        //     console.log(ul.children);
+        // })
+
+        const btn = document.querySelectorAll('button')
+        btn.forEach(item => { // 给每个按钮添加点击事件 删除自己的父元素
+            item.addEventListener('click', (e) => {
+                e.target.parentElement.remove()
+            })
+        })
+    </script>
+</body>
+</html>
