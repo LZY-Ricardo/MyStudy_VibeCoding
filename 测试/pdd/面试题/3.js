@@ -37,8 +37,6 @@ function diff(newObj, oldObj) {
         } else { // 都是原始值直接比较
             if (oldKey && newObj !== oldObj) {
                 console.log(newObj, oldObj);
-
-                
                 diffArr.push(oldKey)
             }
         }

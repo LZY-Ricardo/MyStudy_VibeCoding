@@ -1,7 +1,7 @@
 # project_rules.md（React 项目专属规则）
 
 ## 1. 技术栈与版本约束
-- React 版本：`^18.2.0`（需使用 React 18 并发特性、Hooks 等能力）；
+- React 版本：`^18.2.0` 或者 `^19.0.0`（需使用 React 新版 并发特性、Hooks 等能力）；
 - 核心依赖规范：
   - 路由：`react-router-dom`（优先使用**数据路由、`useNavigate`**等新版 API）；
   - 状态管理：`zustand@^4.0.0`（推荐用 Zustand 做状态管理，避免过度依赖 Context）；

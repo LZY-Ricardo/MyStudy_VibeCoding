@@ -24,9 +24,9 @@ Promise.resolve('成功')
         return Promise.resolve('finally 接收')
     })
     .then(value => {
-        console.log(value);
+        console.log(1,value);
 
     })
     .catch(error => {
-        console.log(error); // 输出: 'finally 拒绝'
+        console.log(2, error); // 输出: 'finally 拒绝'
     });

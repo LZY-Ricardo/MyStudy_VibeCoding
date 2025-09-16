@@ -1,3 +1,4 @@
+'use strict'
 var obj = {
     num: 2,
     adds: function () {

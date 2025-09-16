@@ -3,6 +3,13 @@ map.set(1, 1)
 map.set(2, 2)
 map.delete(3)
 console.log(map)
+console.log(map.keys());
+let obj = {
+    1: 1,
+    2: 2,
+    3: 3
+}
+console.log(Object.keys(obj))
 
 
 // var a = 0 && false || 1 && 2
@@ -16,12 +23,12 @@ console.log(map)
 // console.log(NaN !== NaN); 
 
 
-function foo(a, b) {
-    'use strict';
-    arguments[1] = 2
-    console.log(b);    
-}
-foo(1)
+// function foo(a, b) {
+//     'use strict';
+//     arguments[1] = 2
+//     console.log(b);    
+// }
+// foo(1)
 
 // console.log(1 > 2 > 3, 3 > 2 > 1);
 

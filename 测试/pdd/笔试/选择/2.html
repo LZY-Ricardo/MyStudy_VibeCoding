@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="parent">
+        <button id="child">Click me</button>
+    </div>
+    <script>
+        document.getElementById("parent").addEventListener("click", function () {
+            console.log("Parent clicked");
+        }, true);
+        document.getElementById("child").addEventListener("click", function () {
+            console.log("Child clicked");
+        }, false);
+    </script>
+    Parent clicked 
+    Child clicked
+</body>
+</html>
