@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">请求</button>
+    <script>
+        const btn = document.getElementById('btn')
+        btn.addEventListener('click', () => {
+            const worker = new Worker('worker.js') // worker.js 文件跑成一个单独的线程
+            // 向worker线程发送消息
+            worker.postMessage('https://www.xxxx.com')
+            // 监听worker线程返回的消息
+            worker.onmessage = (e) => {
+                console.log('主线程收到消息', e.data);
+            }
+            // 监听worker线程报错
+            worker.onerror = (e) => {
+                console.log('worker线程报错', e);
+            }
+        })
+    </script>
+</body>
+</html>

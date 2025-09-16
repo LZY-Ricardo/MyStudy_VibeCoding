@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        header, footer {
+            height: 100px;
+            background-color: rgb(107, 80, 80);
+        }
+        main {
+           height: 600px;
+           display: flex;
+        }
+        aside {
+            width: 300px;
+            background-color: #f16565;
+        }
+        section {
+            flex-grow: 1;
+            background-color: #49e349;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <header>header</header>
+    <main>
+        <aside>菜单</aside>
+        <section>
+            内容
+        </section>
+    </main>
+    <footer></footer>
+</body>
+</html>
