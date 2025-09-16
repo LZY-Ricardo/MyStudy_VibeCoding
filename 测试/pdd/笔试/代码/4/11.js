@@ -1,50 +1,52 @@
 async function executeDependencyTree(tree) {
-    const results = {}
-    const executing = new Set() // 正在执行的任务
-    const completed = new Set() // 已完成的任务
-    
-    // 递归执行任务及其依赖
+    const result = {} // 存储结果
+    const executingTasks = new Set() // 正在执行的任务
+    const completedTasks = new Set() // 已经完成的任务
+
     async function executeTask(taskName) {
         // 如果任务已完成，直接返回结果
-        if (completed.has(taskName)) {
-            return results[taskName]
+        if (completedTasks.has(taskName)) {
+            return result[taskName]
         }
-        
-        // 如果任务正在执行，等待其完成（避免重复执行）
-        if (executing.has(taskName)) {
-            while (!completed.has(taskName)) {
-                await new Promise(resolve => setTimeout(resolve, 10))
+
+        // 如果任务正在执行，等待其完成
+        if (executingTasks.has(taskName)) {
+            while (!completedTasks.has(taskName)) {
+                await new Promise(resolve => {
+                    setTimeout(resolve, 10)
+                })
             }
-            return results[taskName]
+            return result[taskName]
         }
-        
+
         // 标记任务开始执行
-        executing.add(taskName)
-        
-        const task = tree[taskName]
-        
-        // 先执行所有依赖任务
-        if (task.dependencies && task.dependencies.length > 0) {
-            // 使用 Promise.all 并行执行依赖任务，但要等待所有依赖完成
-            // 这里 executeTask(dep) 会立马返回一个 Promise{<pending>} 对象 等待依赖任务完成
-            await Promise.all(task.dependencies.map(dep => executeTask(dep)))
+        executingTasks.add(taskName)
+
+        try {
+            // 先执行依赖任务
+            if (tree[taskName].dependencies) {
+                await Promise.all(tree[taskName].dependencies.map(dep => executeTask(dep)))
+            }
+
+            // 执行当前任务
+            result[taskName] = await tree[taskName].task()
+            
+            // 标记任务完成
+            completedTasks.add(taskName)
+            
+            return result[taskName]
+        } catch (error) {
+            // 任务失败时也要从执行集合中移除
+            executingTasks.delete(taskName)
+            throw error
         }
-        
-        // 执行当前任务
-        results[taskName] = await task.task()
-        
-        // 标记任务完成
-        executing.delete(taskName)
-        completed.add(taskName)
-        
-        return results[taskName]
     }
-    
+
     // 获取所有任务名称并并行执行
     const taskNames = Object.keys(tree)
     await Promise.all(taskNames.map(taskName => executeTask(taskName)))
     
-    return results
+    return result
 }
 
 function runTest() {
@@ -123,4 +125,4 @@ function runTest() {
         console.log('--- 捕获到任务失败，符合预期 ---', error.message);
     });
 }
-  runTest()
+runTest()
