@@ -26,7 +26,7 @@ function C() {
     })
 }
 
-Promise.all('dsaf')
+Promise.all([A(), B(), C()])
     .then(
         (res) => {
             console.log('res:',res)
