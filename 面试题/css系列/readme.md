@@ -75,6 +75,7 @@ id 选择器 > 后代选择器 = 子代选择器 = 相邻选择器 = 属性选�
       left: -9999px;
     8. transform: rotateY(90deg);
        transform: rotateX(90deg);
+    9. transform: scale(0);
 
   - 显示元素: 元素在页面中可见, 也占用空间
 
@@ -125,6 +126,11 @@ id 选择器 > 后代选择器 = 子代选择器 = 相邻选择器 = 属性选�
     - 不能被点击
     - 不能被聚焦
   - transform: rotateX(90deg);
+    - 隐藏元素
+    - 占用空间
+    - 不能被点击
+    - 不能被聚焦
+  - transform: scale(0);
     - 隐藏元素
     - 占用空间
     - 不能被点击
