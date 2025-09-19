@@ -48,8 +48,8 @@ function cacheApi(fn) {
             })
         }
         if (map.get(key).data) {
-            map.get(key).lock = true
-            map.get(key).promise = fn(key)
+            map.get(key).lock = true // 关锁
+            map.get(key).promise = fn(key) // 重新赋值 promise 为 最新的请求
             map.get(key).promise.then((res) => {
                 map.set(key, {
                     data: res,
