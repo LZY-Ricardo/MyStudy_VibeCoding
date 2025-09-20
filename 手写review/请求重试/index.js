@@ -35,6 +35,28 @@ function retry(fn, count) {
     })
 }
 
+function retry(fn, count) {
+    return new Promise((resolve, reject) => {
+        function repeat(retries) {
+            fn().then(
+                (value) => {
+                    resolve(value)
+                },
+                (reason) => {
+                    if (retries > 0) {
+                        retries--
+                        console.log(`请求失败,还剩${retries}次机会`);
+                        repeat(retries)
+                    } else {
+                        reject(reason)
+                    }
+                }
+            )
+        }
+        repeat(count)
+    })
+}
+
 retry(ajax, 3)
     .then(res => {
         console.log(res);
