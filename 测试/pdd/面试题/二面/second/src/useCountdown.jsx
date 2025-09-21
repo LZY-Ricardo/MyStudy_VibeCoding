@@ -30,6 +30,6 @@ export default function useCountdown(initialTime, callback) {
         return () => {
             clearInterval(timerRef.current)
         }
-    }, [initialTime])
+    }, [initialTime, callback])
     return time
 }
