@@ -28,7 +28,7 @@ function useCountdown(initialTime, callback) {
     return time
 }
 
-function formatTime(ms) {
+export function formatTime(ms) {
     const hours = Math.floor(ms / (60 * 60 * 1000))
     const minutes = Math.floor((ms % (60 * 60 * 1000)) / (60 * 1000))
     const seconds = Math.floor((ms % (60 * 1000)) / 1000)
