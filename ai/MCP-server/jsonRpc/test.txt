@@ -1,3 +1,5 @@
 { "jsonrpc": "2.0", "method": "sum", "params": {"a": 1, "b": 2}, "id": 1 }
 
 { "jsonrpc": "2.0", "method": "createFile", "params": {"fileName": "C:/Users/lenovo/Desktop/MCP.txt", "content": "Hello, World"}, "id": 2 }
+
+{}
