@@ -74,6 +74,7 @@ function getData(url, retry = 0) {
                     resolve(response);
                 })
                 .catch((error) => {
+                    // 请求失败 记录失败次数
                     state.currentRetry++;
                     if (state.currentRetry <= state.maxRetry) {
                         fetchWithRetry(); // 重试
