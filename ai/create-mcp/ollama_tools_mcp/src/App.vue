@@ -1,4 +1,5 @@
 <template>
+  <div class="app">
   <div>
     <label>
       请输入问题：
@@ -9,6 +10,7 @@
   <div>{{ status }}</div>
   <div>
     <div>{{content}}</div>
+  </div>
   </div>
 </template>
 
