@@ -10,12 +10,12 @@ function getEmbedding(text) {  // 将文本转换为向量
     })
 }
 
-// 读取向量的能力
+
 export async function getVector(text) {
     return (await getEmbedding(text)).embedding
 }
 
-// 过长的文本不适合处理成一个向量, 需要切割成多个子文本
+// 过长的文本不适合处理成一个向量，需要切割为多个子文本
 function splitText(text: string, chunkSize = 300, overlap = 50) {
     const chunks: string[] = []
     let start = 0

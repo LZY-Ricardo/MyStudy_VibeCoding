@@ -42,4 +42,4 @@ embedding 模型, 将数据压缩成语义向量, 通过向量的相似度(余�
 2. 准备向量数据库 (vectra: 一个基于 nodeJS 的微型向量数据库) 企业一般使用 node-faiss 来构建向量数据库, faiss 是facebook 开源的一个向量数据库, 支持 CPU 和 GPU 加速
 3. pnpm i ollama  (安装 ollama SDK)
 4. pnpm i vectra (安装 vectra 向量数据库)
-5. 做 RAG 检索将 高相关的内容 作为参考资料, 放入大模型的提示词中, 大模型根据提示词进行回答
+5. 做 RAG 检索将 高相关的内容 作为参考资料, 输入给 大模型, 大模型根据参考资料再进行回答

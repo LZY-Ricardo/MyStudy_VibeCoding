@@ -42,10 +42,13 @@ export class SimpleRag {
         }
         return res;
     }
+
     async query(query: string, topK: number = 5) {
         if (!this.avaliable) throw new Error('RAG is not initialized');
         const vector = await getVector(query);
         const result = await this.db?.queryItems(vector, query, topK);
         return result?.map(({ item, score }) => ({ text: item.metadata.text, query, simularity: score, id: item.id, }));
     }
+
 }
+

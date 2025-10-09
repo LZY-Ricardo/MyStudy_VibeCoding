@@ -10,7 +10,7 @@ async function main() {
     console.log(JSON.stringify(res)); // 如果 是 ‘RAG 技术原理’ 就说明向量检索成功
 
     const res2 = await rag.query('无关紧要的问题');
-    console.log(JSON.stringify(res2)); 
+    console.log(JSON.stringify(res2));
 }
 
 main();
