@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="200" height="100"></canvas>
+    <script>
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+        ctx.beginPath(); // 开始绘制路径
+        ctx.moveTo(50, 50); // 移动到起点
+        ctx.lineTo(150, 50); // 画线到 (150, 50)
+        ctx.lineTo(100, 10); // 画线到 (100, 10)
+        ctx.closePath(); // 闭合路径
+        ctx.fillStyle = 'red'; // 填充颜色
+        ctx.fill(); // 填充路径(三角形内部填充为红色)
+        ctx.strokeStyle = 'blue'; // 描边颜色
+        ctx.lineWidth = 3; // 描边宽度
+        ctx.stroke(); // 描边路径 (绘制三角形边框)
+    </script>
+</body>
+</html>
