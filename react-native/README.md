@@ -20,6 +20,7 @@
   - 手机上查看效果 react 开发
 
 ## rn UI 组件库
-  ### 思路切换
+  ### 前端思路, 了解不同的生态 (web 生态 | 移动端生态)
   - 用熟悉的 react 组件写法调用 UI 组件
   - 用熟悉的 react 组件写法调用手机原生组件
+  - 不是html5, 没有localStorage, 使用 AsyncStorage 来存储数据

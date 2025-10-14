@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     // 移动应用 没有WebView
     // 原生UI
@@ -15,6 +15,7 @@ import {
     Checkbox,
     List
 } from 'react-native-paper' // UI 组件
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function App() {
     const [task, setTask] = useState('') // input 的数据
@@ -45,6 +46,20 @@ export default function App() {
     const deleteTodo = (id) => {
         setTodos(todos.filter(todo => todo.id !== id))
     }
+
+    // mounted
+    useEffect(() => {
+        AsyncStorage.getItem('todos').then((data) => {
+            if (data) {
+                setTodos(JSON.parse(data))
+            }
+        })
+    }, [])
+
+    // update
+    useEffect(() => {
+        AsyncStorage.setItem('todos', JSON.stringify(todos))
+    }, [todos])
 
     const renderItem = ({ item }) => {
         return (
