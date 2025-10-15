@@ -1,0 +1,14 @@
+'use client'
+
+import React from 'react'
+
+export default function GlobalError({error, reset}) {
+  return (
+      <html>
+          <body>
+              <h2>Something went wrong!</h2>
+              <button onClick={() => reset()}>try again</button>
+          </body>
+    </html>
+  )
+}
