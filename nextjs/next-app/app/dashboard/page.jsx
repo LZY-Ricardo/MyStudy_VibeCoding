@@ -1,7 +1,17 @@
+'use client'
+
 import React from 'react'
 
-export default function page() {
+async function getData() {
+    await new Promise(resolve => setTimeout(resolve, 3000))
+    return {
+        message: 'Hello Dashboard!'
+    }
+}
+
+export default async function DashboardPage(props) {
+    const { message } = await getData()
   return (
-    <div>hello dashboard!</div>
+    <h1>{message}</h1>
   )
 }
