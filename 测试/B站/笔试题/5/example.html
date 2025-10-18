@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        .food {
+            border: 1px dashed #FFCCCB;
+            margin: 10px 0;
+            width: 100px;
+            cursor: move;
+        }
+
+        .plate {
+            border: 1px solid #2AA549;
+            width: 300px;
+            min-height: 100px;
+            margin-top: 20px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="magnifier"></section>
+
+    <script>
+        var magnifier = {
+            init(param) {
+                const el = param.el;
+                if (!el) return;
+                this.createElement(el, param.food);
+                this.initEvent();
+            },
+
+            createElement(el, food) {
+                const foodUl = document.createElement('ul');
+                for (let foodName of food) {
+                    const foodLi = document.createElement('li');
+                    foodLi.className = 'food';
+                    foodLi.draggable = true;
+                    foodLi.innerText = foodName;
+                    foodUl.appendChild(foodLi);
+                }
+                el.appendChild(foodUl);
+
+                const plateDiv = document.createElement('div');
+                plateDiv.className = 'plate';
+                plateDiv.innerText = '小明的餐盘';
+                el.appendChild(plateDiv);
+            },
+
+            initEvent() {
+                const foodNodes = document.querySelectorAll('.food');
+                const plate = document.querySelector('.plate');
+                let dragNode = null;
+                let cloneDom = null;
+
+                // 拖动开始：克隆节点，原食物不消失
+                foodNodes.forEach(food => {
+                    food.addEventListener('dragstart', (e) => {
+                        dragNode = e.target;
+                        cloneDom = e.target.cloneNode(true);
+                        cloneDom.style.opacity = '0.5';
+                        e.dataTransfer.effectAllowed = 'copy';
+                    });
+                });
+
+                // 拖动过程中
+                plate.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'copy';
+                });
+
+                // 拖动结束：将克隆的食物放入餐盘
+                plate.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    if (cloneDom) {
+                        const newItem = document.createElement('div');
+                        newItem.innerText = dragNode.innerText;
+                        plate.appendChild(newItem);
+                        cloneDom = null;
+                    }
+                });
+            }
+        };
+
+        // 初始化
+        magnifier.init({
+            el: document.getElementById('magnifier'),
+            food: ['猪排', '牛排', '拍黄瓜', '小青菜']
+        });
+    </script>
+
+</body>
+
+</html>

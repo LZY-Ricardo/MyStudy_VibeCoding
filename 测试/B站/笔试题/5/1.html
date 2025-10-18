@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+    <html>
+
+        <head>
+            <meta charset=utf-8>
+                <style type="text/css">
+                    .food {
+                        border: 1px dashed #FFC0CB;
+                    margin: 10px 0;
+                    width: 100px;
+    }
+
+                    .plate {
+                        border: 1px solid #2AA549;
+                    width: 300px;
+    }
+                </style>
+        </head>
+
+        <body>
+            <section id="magnifier"></section>
+
+
+
+            <script >
+                let food = ['猪排', '牛排', '拍黄瓜', '小青菜']
+                var magnifier = {
+
+
+                    init(param) {
+                const el = param.el
+                if (!el) return
+                this.createElement(el,food)
+                this.initEvent()
+            },
+                createElement(el, food) {
+              const foodUl = document.createElement('ul');
+                for (let foodName of food) {
+                const foodLi = document.createElement('li');
+                foodLi.className = 'food';
+                foodLi.draggable = true;
+                foodLi.innerHTML = foodName;
+                foodUl.appendChild(foodLi);
+              }
+                el.appendChild(foodUl)
+                const plateDiv = document.createElement('div');
+                plateDiv.className = 'plate';
+                plateDiv.innerText = "小明的餐盘";
+                el.appendChild(plateDiv);
+            },
+                initEvent() {
+                const foodNodes = document.querySelectorAll('.food')
+                const plate = document.querySelector('.plate')
+                let dragNode = null
+                let cloneDom = { };
+                // TODO: 当开始拖动食物时触发，原食物不消失
+                foodNodes.forEach(node => {
+                    node.addEventListener('dragstart', (event) => {
+                        dragNode = event.target
+                        event.dataTransfer.effectAllowed = 'copy'
+                        event.dataTransfer.setData('text/plain', event.target.innerHTML)
+                    })
+                })
+                // TODO: 食物拖动过程中的处理
+                plate.addEventListener('dragover', (event) => {
+                    event.preventDefault()
+                    event.dataTransfer.dropEffect = 'copy'
+                })
+                // TODO: 鼠标左键释放后，食物落入餐盘中
+                plate.addEventListener('drop', (event) => {
+                    event.preventDefault()
+                    if (dragNode) {
+                        const newFood = dragNode.cloneNode(true)
+                newFood.draggable = false
+                plate.appendChild(newFood)
+                dragNode = null
+                    }
+               })
+            }
+        }
+                magnifier.init({
+                    // TODO: 请获取id=magnifier的节点
+                    el: document.getElementById('magnifier'),
+                food: ['猪排', '牛排', '拍黄瓜', '小青菜']
+        })
+            </script>
+
+        </body>
+
+    </html>
