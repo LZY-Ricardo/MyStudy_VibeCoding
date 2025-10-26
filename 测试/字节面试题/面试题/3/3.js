@@ -12,3 +12,24 @@ function flatten(arr) {
     }, [])
 }
 console.log(flatten(arr));
+
+function flatten2(arr) {
+    let newArr = []
+    for (let item of arr) {
+        if (Array.isArray(item)) {
+            newArr =  newArr.concat(flatten2(item))
+        } else {
+            newArr.push(item)
+        }
+    }
+    return newArr
+}
+console.log(flatten2(arr))
+
+function flatten3(arr) {
+    while (arr.some(item => Array.isArray(item))) { 
+        arr = [].concat(...arr)
+    }
+    return arr
+}
+console.log(flatten3(arr));
