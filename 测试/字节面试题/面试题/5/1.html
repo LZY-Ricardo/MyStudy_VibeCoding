@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .parent {
+            visibility: hidden;
+            position: relative;
+            border: 2px solid red;
+            padding: 20px;
+        }
+
+        .child {
+            visibility: visible;
+            /* position: absolute; */
+            /* 去掉这一行再试 */
+            background: lightgreen;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        父元素（隐藏）
+        <div class="child">子元素（看是否显示）</div>
+    </div>
+
+</body>
+
+</html>
