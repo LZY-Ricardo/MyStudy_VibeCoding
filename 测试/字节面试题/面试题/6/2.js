@@ -34,4 +34,5 @@ function createTree(arr) {
 }
 
 const tree = createTree(arr);
-console.log('树形结构:', JSON.stringify(tree, null, 2));
+
+console.log('树形结构最终结果:', JSON.stringify(tree, null, 2));
