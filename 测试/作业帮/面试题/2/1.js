@@ -1,0 +1,14 @@
+// 题目要求：
+// 实现一个 retry 函数，尽量通用。
+// 示例中 retry(request, 2) 表示最多重试 2 次（即最多调用 3 次）。
+// 使用 fetch 请求 / api / get - movie，参数通过 JSON.stringify(params) 传入 body。
+// 示例调用：retryRequest({ movieId: 1001 })，并使用 await 获取结果。
+
+const retry = () => {  }
+
+const request = (params) => fetch('/api/get-movie', {
+    body: JSON.stringify(params)
+});
+
+const retryRequest = retry(request, 2);
+const response = await retryRequest({ movieId: 1001 });
