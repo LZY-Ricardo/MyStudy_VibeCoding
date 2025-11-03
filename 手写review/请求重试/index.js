@@ -14,7 +14,7 @@ function ajax(url) {
 function retry(fn, count) {
     let times = count
     return new Promise((resolve, reject) => {
-        function repeat() {
+        function repeat() {  
             fn().then(
                 (value) => {
                     resolve(value)
