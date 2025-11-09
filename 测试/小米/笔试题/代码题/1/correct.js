@@ -6,7 +6,7 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', (equation) => {
-    // 提取未知数（唯一的小写字母）
+    // 提取未知数（唯一的小写字母） 
     const varChar = equation.match(/[a-z]/)[0];
     // 分割方程为左右两部分
     const [left, right] = equation.split('=');
