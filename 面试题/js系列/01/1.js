@@ -1,5 +1,5 @@
 const arr = ['a', 'b', 'c', 'd']
-// arr.splice(2, 0, 'm')
+// arr.splice(2, 0, 'm') 
 // console.log(arr);
 // const arr2 = arr.concat('e', 'f')
 // console.log(arr2);
