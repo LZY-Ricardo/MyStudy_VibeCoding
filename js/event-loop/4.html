@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>等待变化</div>
+    <button>点击我</button>
+    <script>
+        const div = document.querySelector('div');
+        const button = document.querySelector('button');
+
+        // 死循环指定时间
+        function delay(duration) {
+            var start = Date.now();
+            while (Date.now() - start < duration) {}
+        }
+        button.addEventListener('click', () => {
+            div.textContent = '被点击了';
+            delay(3000)
+            setTimeout(() => {
+                div.textContent = '6秒后修改';
+            }, 6000);
+        });
+    </script>
+    
+</body>
+</html>
