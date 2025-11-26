@@ -29,3 +29,24 @@ const instance3 = Singleton2.getInstance();
 const instance4 = Singleton2.getInstance();
 
 console.log(instance3 === instance4); // true
+
+
+function Singleton3() {
+    // 构造函数
+    this.show = () => {
+        console.log('show')
+    }
+}
+Singleton3.getInstance = (function () {
+    let instance = null
+    return function () {
+        if (!instance) instance = new Singleton3();
+        return instance;
+    }
+}())
+
+const instance5 = Singleton3.getInstance();
+const instance6 = Singleton3.getInstance();
+instance5.show()
+
+console.log(instance5 === instance6); // true
