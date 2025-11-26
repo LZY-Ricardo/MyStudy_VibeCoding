@@ -16,13 +16,13 @@ const instance2 = Singleton.getInstance();
 console.log(instance1 === instance2); // true
 
 function Singleton2() {
-    this.instance = null;
-    // 私有属性，防止外部直接访问
+    // 构造函数
 }
+
 Singleton2.getInstance = function() {
-    if (!this.instance)
-        this.instance = new Singleton();
-    return this.instance;
+    if (!Singleton2.instance)
+        Singleton2.instance = new Singleton2();
+    return Singleton2.instance;
 }
 
 const instance3 = Singleton2.getInstance();
