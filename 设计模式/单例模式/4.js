@@ -16,5 +16,6 @@ SingleDog.getInstance = (function() {
 
 const s1 = SingleDog.getInstance()
 const s2 = SingleDog.getInstance()
+s1.show()
 console.log(s1 === s2) // true
 
