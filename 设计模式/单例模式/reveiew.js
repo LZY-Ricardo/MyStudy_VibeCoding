@@ -15,7 +15,7 @@ const instance2 = Singleton.getInstance();
 
 console.log(instance1 === instance2); // true
 
-function Singleton2() {
+function Singleton2() {       
     // 构造函数
 }
 
