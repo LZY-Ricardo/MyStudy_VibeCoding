@@ -29,9 +29,9 @@ const instance3 = Singleton2.getInstance();
 const instance4 = Singleton2.getInstance();
 
 console.log(instance3 === instance4); // true
+  
 
-
-function Singleton3() {
+function Singleton3() {    
     // 构造函数
     this.show = () => {
         console.log('show')
