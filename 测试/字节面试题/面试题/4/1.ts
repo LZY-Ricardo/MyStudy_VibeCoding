@@ -14,4 +14,4 @@ type TB = Pick<ITest, 'a'>
 type TC = Partial<ITest>
 
 // 所有属性变为必选
-type TD = Required<ITest>
+type TD = Required<ITest> 
