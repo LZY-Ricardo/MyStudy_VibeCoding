@@ -10,7 +10,7 @@
 import { ref, watch } from 'vue';
 
 // 数据
-let sum = ref(0);
+let sum = ref(0);   
 
 // 方法
 function add() {
