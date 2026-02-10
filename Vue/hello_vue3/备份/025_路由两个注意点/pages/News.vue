@@ -1,7 +1,7 @@
 <template>
-  <div class="about">
-    <h1>About Page</h1>
-    <p>This is the about page.</p>
+  <div class="news">
+    <h1>News Page</h1>
+    <p>Latest news and updates.</p>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 </script>
 
 <style scoped>
-.about {
+.news {
   padding: 20px;
 }
 </style>
