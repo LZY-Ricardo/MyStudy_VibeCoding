@@ -3,8 +3,11 @@
     <div class="component-box parent-box">
       <h2>父组件</h2>
       <p class="desc">自定义事件 父组件示例</p>
+      <h4 v-if="toy">子给的玩具: {{ toy }}</h4>
       <div class="child-wrapper">
-        <Child />
+        <!--给子组件Child绑定事件-->
+        <!-- <Child @send-toy="saveToy"/> -->
+        <Child @send-toy="toy = $event"/>
       </div>
     </div>
   </div>
@@ -12,6 +15,14 @@
 
 <script setup lang="ts" name="CustomEventParent">
 import Child from './Child.vue'
+import { ref } from 'vue'
+
+let toy = ref('')
+
+function saveToy(value: string) {
+  console.log('saveToy', value)
+  toy.value = value
+}
 </script>
 
 <style scoped>

@@ -2,12 +2,25 @@
   <div class="child-container">
     <div class="component-box child-box">
       <h2>子组件</h2>
-      <p class="desc">自定义事件 子组件示例</p>
+      <p>玩具: {{ toy }}</p>
+      <button @click="emit('send-toy', toy)">测试</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="CustomEventChild">
+import { ref, onMounted } from 'vue'
+
+let toy = ref('奥特曼')
+
+// 声明事件
+const emit = defineEmits(['send-toy'])
+
+// onMounted(() => {
+//   setTimeout(() => {
+//     emit('haha')
+//   }, 3000)
+// })
 </script>
 
 <style scoped>
