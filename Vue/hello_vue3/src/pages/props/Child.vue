@@ -1,13 +1,22 @@
 <template>
   <div class="child-container">
     <div class="component-box child-box">
-      <h2>子组件</h2>
+      <h2>子组件2</h2>
       <p class="desc">Props 子组件示例</p>
+      <p>玩具: {{ toy }}</p>
+      <button @click="sendToy(toy)">把玩具交给父亲</button>
+      <p>父亲给的车: {{ car }}</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="PropsChild">
+import { ref } from 'vue';
+
+let toy = '奥特曼'
+// 声明式接受数据
+let props = defineProps(['car', 'sendToy'])
+
 </script>
 
 <style scoped>
