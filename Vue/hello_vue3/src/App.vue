@@ -1,14 +1,23 @@
-<template lang="">
-  <Count />
-  <hr />
-  <LoveTalk />
+<template>
+  <router-view></router-view>
 </template>
 
 <script setup lang="ts" name="App">
-import Count from '@/components/Count.vue'
-import LoveTalk from '@/components/LoveTalk.vue'
 </script>
 
-<style lang="">
-  
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+}
 </style>
