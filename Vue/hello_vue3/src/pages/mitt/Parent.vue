@@ -4,14 +4,16 @@
       <h2>父组件</h2>
       <p class="desc">Mitt 事件总线 父组件示例</p>
       <div class="child-wrapper">
-        <Child />
+        <Child1 />
+        <Child2 />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="MittParent">
-import Child from './Child.vue'
+import Child1 from './Child1.vue'
+import Child2 from './Child2.vue'
 </script>
 
 <style scoped>
