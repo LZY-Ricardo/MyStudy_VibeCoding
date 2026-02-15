@@ -59,4 +59,4 @@ import Child2 from './Child2.vue'
   align-items: center;
   width: 100%;
 }
-</style>
+</style>    
