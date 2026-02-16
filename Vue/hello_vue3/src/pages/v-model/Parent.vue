@@ -2,7 +2,13 @@
   <div class="parent-container">
     <div class="component-box parent-box">
       <h2>父组件</h2>
-      <p class="desc">v-model 父组件示例</p>
+      <!--v-model用在html标签上-->
+      <!-- <input type="text" v-model="username"> -->
+      <!-- <input type="text" :value="username" @input="username = (<HTMLInputElement>$event.target).value"> -->
+
+      <!--v-model用在组件标签上-->
+        <MyInput v-model="username" />
+        <!-- <MyInput :modelValue="username" @update:modelValue="username = $event"/> -->
       <div class="child-wrapper">
         <Child />
       </div>
@@ -12,6 +18,12 @@
 
 <script setup lang="ts" name="VModelParent">
 import Child from './Child.vue'
+import { ref } from 'vue'
+import MyInput from './MyInput.vue'
+
+
+// 数据
+const username = ref('zhangsan')
 </script>
 
 <style scoped>
