@@ -43,16 +43,15 @@ interface Route {
 }
 
 const routes = ref<Route[]>([
-  { path: '/props', title: 'Props 传递', icon: '📦' },
-  { path: '/custom-event', title: '自定义事件', icon: '🎯' },
-  { path: '/v-model', title: 'v-model', icon: '🔗' },
-  { path: '/provide-inject', title: 'Provide/Inject', icon: '💉' },
-  { path: '/slots', title: '插槽 Slots', icon: '🎰' },
-  { path: '/refs', title: 'Refs 模板引用', icon: '🔍' },
-  { path: '/expose', title: 'Expose', icon: '🔓' },
-  { path: '/css-variable', title: 'CSS 变量', icon: '🎨' },
-  { path: '/mitt', title: 'Mitt 事件总线', icon: '📡' },
-  { path: '/pinia', title: 'Pinia 状态管理', icon: '🗄️' }
+  { path: '/01-props', title: 'Props 传递', icon: '📦' },
+  { path: '/02-custom-event', title: '自定义事件', icon: '🎯' },
+  { path: '/03-mitt', title: 'Mitt 事件总线', icon: '📡' },
+  { path: '/04-v-model', title: 'v-model', icon: '🔗' },
+  { path: '/05-attrs', title: '$attrs', icon: '📋' },
+  { path: '/06-refs-parent', title: '$refs & $parent', icon: '🔍' },
+  { path: '/07-provide-inject', title: 'Provide/Inject', icon: '💉' },
+  { path: '/08-pinia', title: 'Pinia 状态管理', icon: '🗄️' },
+  { path: '/09-slots', title: '插槽 Slots', icon: '🎰' }
 ])
 </script>
 
