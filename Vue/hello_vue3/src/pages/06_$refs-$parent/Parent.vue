@@ -17,10 +17,23 @@
 <script setup lang="ts" name="RefsParent">
 import Child2 from './Child2.vue'
 import Child1 from './Child1.vue'
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
 let c1 = ref()
 let c2 = ref()
+
+// 注意点: 当访问obj.c的时候, 底层会自动读取value属性, 因为c是在obj这个响应式变量中的
+let obj = reactive({
+  a: 1,
+  b: 2,
+  c: ref(3)
+})
+let x =ref(4)
+console.log(obj.a)
+console.log(obj.b)
+console.log(obj.c)
+console.log(x.value);
+
 
 // 数据
 let house = ref(4)
