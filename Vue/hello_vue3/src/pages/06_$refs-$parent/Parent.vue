@@ -2,16 +2,49 @@
   <div class="parent-container">
     <div class="component-box parent-box">
       <h2>父组件</h2>
-      <p class="desc">Refs 模板引用 父组件示例</p>
+      <h4>房产: {{ house }}</h4>
       <div class="child-wrapper">
-        <Child />
+        <button @click="changeToy">修改child1的玩具</button>
+        <button @click="changeComputer">修改child2的电脑</button>
+        <button @click="getAllChild($refs)">让所有孩子的书变多</button>
+        <Child1 ref="c1" />
+        <Child2 ref="c2"/>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="RefsParent">
-import Child from './Child.vue'
+import Child2 from './Child2.vue'
+import Child1 from './Child1.vue'
+import { ref } from 'vue'
+
+let c1 = ref()
+let c2 = ref()
+
+// 数据
+let house = ref(4)
+
+// 方法
+function changeToy() {
+  console.log(c1.value)
+  c1.value.toy='小猪佩奇'
+}
+
+function changeComputer() {
+  console.log(c2.value)
+  c2.value.computer='苹果'
+}
+
+function getAllChild(refs: Record<string, any>) {
+  for (let key in refs) {
+    console.log(key, refs[key]);
+    refs[key].book += 3    
+  }
+}
+
+// 将数据交给外部
+defineExpose({house})
 </script>
 
 <style scoped>

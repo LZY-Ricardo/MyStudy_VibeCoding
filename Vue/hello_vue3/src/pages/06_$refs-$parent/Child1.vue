@@ -1,13 +1,29 @@
 <template>
   <div class="child-container">
     <div class="component-box child-box">
-      <h2>子组件</h2>
-      <p class="desc">Refs 模板引用 子组件示例</p>
+      <h2>子组件1</h2>
+      <h4>玩具: {{ toy }}</h4>
+      <h4>书籍: {{ book }}本</h4>
+      <button @click="minusHouse($parent)">干掉父亲的一套房产</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="RefsChild">
+import { ref } from 'vue'
+
+// 数据
+let toy = ref('奥特曼')
+let book = ref(3)
+
+// 方法
+function minusHouse(parent: any) {
+  console.log(parent);
+  parent.house--
+}
+
+// 把数据交给外部
+defineExpose({ toy, book })
 </script>
 
 <style scoped>
