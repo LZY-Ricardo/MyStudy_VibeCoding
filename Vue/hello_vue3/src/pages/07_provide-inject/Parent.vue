@@ -2,7 +2,9 @@
   <div class="parent-container">
     <div class="component-box parent-box">
       <h2>父组件</h2>
-      <p class="desc">Provide/Inject 父组件示例</p>
+      <p>当前余额：{{ money }}</p>
+      <p>当前车品牌：{{ car.brand }}</p>
+      <p>当前车价格：{{ car.price }}</p>
       <div class="child-wrapper">
         <Child />
       </div>
@@ -12,6 +14,23 @@
 
 <script setup lang="ts" name="ProvideInjectParent">
 import Child from './Child.vue'
+import { reactive, ref, provide } from 'vue'
+
+// 数据
+const money = ref(100)
+const car = reactive({
+  brand: '奔驰',
+  price: 100,
+})
+
+// 方法
+function updateMoney(value: number) {
+  money.value += value
+}
+
+// 向后代提供数据
+provide('moneyContext', { money, updateMoney})
+provide('car', car)
 </script>
 
 <style scoped>
