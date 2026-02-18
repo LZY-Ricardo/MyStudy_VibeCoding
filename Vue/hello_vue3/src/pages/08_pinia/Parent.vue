@@ -3,6 +3,8 @@
     <div class="component-box parent-box">
       <h2>父组件</h2>
       <p class="desc">Pinia 状态管理 父组件示例</p>
+      <h3>直接参考之前讲的pinia章节
+      </h3>
       <div class="child-wrapper">
         <Child />
       </div>
