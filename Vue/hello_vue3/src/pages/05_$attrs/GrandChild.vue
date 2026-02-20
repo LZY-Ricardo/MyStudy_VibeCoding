@@ -31,7 +31,7 @@
         <button @click="updateA(6)">点我将爷爷那的a加6</button>
       </div>
     </div>
-  </div>
+  </div>   
 </template>
 
 <script setup lang="ts" name="AttrsGrandChild">
