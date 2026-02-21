@@ -3,16 +3,31 @@
     <div class="component-box parent-box">
       <h2>父组件</h2>
       <div class="category-wrapper">
-        <Category title="热门游戏列表" >
-          <ul>
-            <li v-for="game in games" :key="game.id">{{game.name}}</li>
-          </ul>
+        <Category>
+          <template v-slot:s2>
+            <ul>
+              <li v-for="game in games" :key="game.id">{{ game.name }}</li>
+            </ul>
+          </template>
+          <template v-slot:s1>
+            <h2>热门游戏列表</h2>
+          </template>
         </Category>
-        <Category title="今日美食城市">
-          <img :src="imgUrl" alt="今日美食城市" />
+        <Category>
+          <template v-slot:s2>
+            <img :src="imgUrl" alt="今日美食城市" />
+          </template>
+          <template v-slot:s1>
+            <h2>今日美食城市</h2>
+          </template>
         </Category>
         <Category title="今日影视推荐">
-          <video :src="videoUrl" controls></video>
+          <template #s2>
+            <video :src="videoUrl" controls></video>
+          </template>
+          <template #s1>
+            <h2>今日影视推荐</h2>
+          </template>
         </Category>
       </div>
     </div>
@@ -20,14 +35,14 @@
 </template>
 
 <script setup lang="ts" name="SlotsParent">
-import Category from './category.vue';
+import Category from './category.vue'
 import { ref, reactive } from 'vue'
 
 let games = reactive([
-  {id:'001', name: '瓦洛兰特'},
-  {id:'002', name: '王者荣耀'},
-  {id:'003', name: '原神'},
-  {id:'004', name: ' csgo'},
+  { id: '001', name: '瓦洛兰特' },
+  { id: '002', name: '王者荣耀' },
+  { id: '003', name: '原神' },
+  { id: '004', name: ' csgo' },
 ])
 
 let imgUrl = ref('https://z1.ax1x.com/2023/11/19/piNxLo4.jpg')
@@ -78,7 +93,7 @@ let videoUrl = ref('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4')
   width: 100%;
 }
 
-.category-wrapper{
+.category-wrapper {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -98,10 +113,21 @@ li {
   margin: 5px 0;
 }
 
-img, video{
+img,
+video {
   width: 100%;
   height: 100px;
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  margin: 0 0 10px 0;
+  background-color: orange;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 800;
 }
 </style>
