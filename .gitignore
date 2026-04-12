@@ -1,1 +1,4 @@
-.claude/** 
+.claude/**
+
+# Dependencies (do not commit)
+node_modules/
