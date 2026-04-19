@@ -146,7 +146,7 @@ async function runStreamingAgent(userMessage: string): Promise<void> {
           arguments: currentToolCall.arguments,
         },
       });
-      process.stdout.write(`${currentToolCall.arguments}]\n`);
+      process.stdout.write(`${currentToolCall.arguments})\n`);
     }
 
     // 构建 assistant 消息并加入历史
